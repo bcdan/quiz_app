@@ -1,0 +1,41 @@
+GET http://localhost:3000/questions
+
+###
+
+GET http://localhost:3000/questions/6012f0f141e36c4a88b02e60
+###
+
+
+POST http://localhost:3000/questions
+Content-Type: application/json 
+
+{
+    "examID":2,
+    "choices":[
+        {"text":"choice a","isCorrect":false},
+        {"text":"choice b","isCorrect":true},
+        {"text":"choice c","isCorrect":false}
+    ],
+    "title":"second question",
+    "points":30
+
+}
+
+###
+DELETE http://localhost:3000/questions/6012f44444967a4c8c53ab31
+
+###
+POST http://localhost:3000/exams
+Content-Type:application/json
+{
+    "examID":1,
+    "title":"Java exam",
+    "teacherID":2,
+    "duration":60,
+    "date":"16008688930050",
+    "questions":[
+        {
+        }
+    ]
+
+}

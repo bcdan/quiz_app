@@ -1,7 +1,7 @@
 exports.getHomePage = (req,res)=>{
-    res.render('main',{layout:'layouts/main'});
+    res.render('main');
 };
 
 exports.getDashboard = (req,res)=>{
-    res.render('dashboard',{layout:'layouts/login'});
+    res.render('dashboard');
 };

@@ -1,21 +1,22 @@
 const express = require('express');
 const router = express.Router();
 const ExamsController = require('../controllers/exams');
+const { ensureNotAuthenticated , ensureAuthenticated } = require('../config/auth');
 
 
 //GET all exams
-router.get('/',ExamsController.getExams);
+router.get('/',ensureAuthenticated,ExamsController.getExams);
 
 //GET one exam
 router.get('/:id',ExamsController.getOneExam);
 
-router.post('/',ExamsController.addExam);
+router.post('/',ensureAuthenticated,ExamsController.addExam);
 
 //Update an exam
-router.put('/:id',ExamsController.updateExam);
+router.put('/:id',ensureAuthenticated,ExamsController.updateExam);
 
 //delete an exam
-router.delete('/:id',ExamsController.deleteExam);
+router.delete('/:id',ensureAuthenticated,ExamsController.deleteExam);
 
 
 

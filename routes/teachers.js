@@ -1,10 +1,27 @@
 const express = require('express');
 const router = express.Router();
 const TeachersController = require('../controllers/teachers');
+const { ensureNotAuthenticated , ensureAuthenticated } = require('../config/auth');
+
+// Login Page
+router.get('/login', ensureNotAuthenticated,TeachersController.getLoginPage );
+
+// Register Page - ADD teacher
+router.get('/register',ensureNotAuthenticated, TeachersController.getRegisterPage );
+
+// Register
+router.post('/register', ensureNotAuthenticated, TeachersController.registerTeacher);
+
+//login handle
+router.post('/login',ensureNotAuthenticated, TeachersController.handleLogin);
+
+//logout handle
+router.get('/logout', TeachersController.handleLogout);
 
 
 //GET all Teachers
 router.get('/',TeachersController.getTeachers);
+
 
 //GET teacher by id
 router.get('/:id',TeachersController.getOneTeacher);

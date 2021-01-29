@@ -39,3 +39,23 @@ Content-Type:application/json
     ]
 
 }
+
+###
+GET http://localhost:3000/teachers/60142585c399b061d18410bb
+
+###
+DELETE http://localhost:3000/teachers/601424e547ad99614c093773
+
+###
+
+PUT http://localhost:3000/teachers/60142585c399b061d18410bb
+Content-Type: application/json
+
+{
+  "firstName": "avi",
+  "lastName": "nir",
+  "email": "test@gmail.com",
+  "password": "$2a$10$bKe8HXLWEu9XJAfGQfngkun.yPELuUxE.e9jCO3MyB/XxfsxpZV7i",
+  "date": "1611933061579",
+  "__v": 0
+}

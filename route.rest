@@ -2,6 +2,11 @@ GET http://localhost:3000/questions
 
 ###
 
+PUT http://localhost:3000/questions/6012f4ad44967a4c8c53ab32
+
+
+###
+
 GET http://localhost:3000/questions/6012f0f141e36c4a88b02e60
 ###
 
@@ -10,34 +15,30 @@ POST http://localhost:3000/questions
 Content-Type: application/json 
 
 {
-    "examID":2,
     "choices":[
         {"text":"choice a","isCorrect":false},
         {"text":"choice b","isCorrect":true},
         {"text":"choice c","isCorrect":false}
     ],
-    "title":"second question",
-    "points":30
+    "title":"some question",
+    "points":20
 
 }
 
 ###
-DELETE http://localhost:3000/questions/6012f44444967a4c8c53ab31
+
+GET http://localhost:3000/exams
+
+###
+DELETE http://localhost:3000/questions/601571ef9677513879d927a6
 
 ###
 POST http://localhost:3000/exams
 Content-Type:application/json
-{
-    "examID":1,
-    "title":"Java exam",
-    "teacherID":2,
-    "duration":60,
-    "date":"16008688930050",
-    "questions":[
-        {
-        }
-    ]
 
+{
+    "title":"Java exam",
+    "duration":60
 }
 
 ###
@@ -52,10 +53,7 @@ PUT http://localhost:3000/teachers/60142585c399b061d18410bb
 Content-Type: application/json
 
 {
-  "firstName": "avi",
+  "firstName": "avihagever",
   "lastName": "nir",
-  "email": "test@gmail.com",
-  "password": "$2a$10$bKe8HXLWEu9XJAfGQfngkun.yPELuUxE.e9jCO3MyB/XxfsxpZV7i",
-  "date": "1611933061579",
-  "__v": 0
+  "username": "avinir2020"
 }

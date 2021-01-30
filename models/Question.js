@@ -3,8 +3,9 @@ const mongoose = require('mongoose');
 const QuestionSchema = new mongoose.Schema({
 
     examID:{
-        type: Number,
-        required : true
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Exam',
+        required:false
     },
     choices:[{
         text:{
@@ -25,10 +26,11 @@ const QuestionSchema = new mongoose.Schema({
     },
     points:{
         type:Number,
-        required:true
+        required:false
     }
 
 });
+
 
 const Question = mongoose.model('Question',QuestionSchema);
 

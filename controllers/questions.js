@@ -1,4 +1,5 @@
 const Question = require('../models/Question');
+const Exam = require('../models/Exam');
 
 exports.getQuestions = async (req,res)=>{
     try{
@@ -19,6 +20,13 @@ exports.addQuestion =async (req,res)=>{
         });
         try{
             const newQuestion = await question.save();
+            const _id = req.body.examID;
+            if(_id){
+                const examToUpdate = await Exam.findById({_id});
+                examToUpdate.questions.push(newQuestion);
+                await examToUpdate.save();
+            }
+
             res.status(201).json(newQuestion);
 
         }catch(err){
@@ -75,15 +83,38 @@ exports.updateQuestion = async (req,res)=>{
 
 exports.deleteQuestion = async (req,res)=>{
     try{
-        const _id = req.params.id;
-        const question = await Question.deleteOne({_id});
-        if(question.deletedCount ===0){
-            res.status(404).json();
-        }else{
-            res.json({message:"removed question"});
-        }
+        let _id = req.params.id;
+      const questionToRemove =  await Question.findByIdAndRemove({_id});
+      if(questionToRemove){
+          _id= questionToRemove.examID;
+
+       let findExam =  await Exam.findOne({_id});
+       let size = findExam.questions.length;
+       for(let i = 0 ; i<size;i++){
+           if(findExam.questions[i].equals(questionToRemove._id)){
+               findExam.questions.splice(i,1);
+           }
+       }
+       await findExam.save();
+       res.json({message:"removed question"});
+    }
     }catch(err){
         res.status(500).json({"message":err.message});
 
     }
 };
+
+
+exports.getByExam = async(req,res)=>{
+    try{
+        let questions = [];
+        let _id = req.params.id;
+        const question = await Question.find({examID:_id})
+        res.status(200).json(question);
+
+    }catch(err){
+        res.status(500).json({message:err.message});
+    }
+
+};
+

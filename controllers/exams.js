@@ -12,7 +12,6 @@ exports.getExams = async (req,res)=>{
 
 exports.addExam = async (req,res)=>{
     const exam = new Exam({
-        examID:req.body.examID,
         title:req.body.title,
         teacherID:req.body.teacherID,
         duration:req.body.duration,
@@ -45,12 +44,11 @@ exports.getOneExam = async (req,res)=>{
 exports.updateExam = async (req,res)=>{
     try{
         const _id = req.params.id;
-        const {examID,title,teacherID,duration,date,questions} = req.body
+        const {title,teacherID,duration,date,questions} = req.body
 
         let exam = await Exam.findOne({_id});
         if(!exam){
             exam = await Exam.create({
-                examID,
                 title,
                 teacherID,
                 duration,
@@ -59,8 +57,6 @@ exports.updateExam = async (req,res)=>{
             });
             res.status(201).json(exam);
         }else{
-            if(examID!=null)
-                exam.examID=examID;
             if(title!=null)
                 exam.title=title;
             if(duration!=null)

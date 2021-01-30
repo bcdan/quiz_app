@@ -1,30 +1,25 @@
 const mongoose = require('mongoose');
-const Question = require('./Question');
 
 const ExamSchema = new mongoose.Schema({
-
-    examID:{
-        type: Number,
-        required : true
-    },
     title:{
         type:String,
-        required:true
+        required:false
     },
     teacherID:{
-        type:Number,
-        required:true
+        type:String,
+        required:false
     },
     duration:{
         type:Number,
-        required:true
+        required:false
     },
     date:{
         type:Date,
-        required:true
+        required:false
     },
     questions:[{
-        type:Object,
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Question',
         required:false
     }]
 

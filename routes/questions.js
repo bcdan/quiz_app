@@ -11,11 +11,14 @@ router.post('/',QuestionsController.addQuestion);
 //GET one question by ID
 router.get('/:id',QuestionsController.getOneQuestion);
 
+router.get('/byexam/:id',QuestionsController.getByExam);
+
 //Update a question by id
 router.put('/:id',QuestionsController.updateQuestion);
 
 //delete a question
 router.delete('/:id',QuestionsController.deleteQuestion);
+
 
 
 

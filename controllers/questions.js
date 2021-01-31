@@ -11,6 +11,7 @@ exports.getQuestions = async (req,res)=>{
 };
 
 exports.addQuestion =async (req,res)=>{
+        console.log(req.body.choices,req.body.title);
 
         const question = new Question({
             examID:req.body.examID,
@@ -87,15 +88,16 @@ exports.deleteQuestion = async (req,res)=>{
       const questionToRemove =  await Question.findByIdAndRemove({_id});
       if(questionToRemove){
           _id= questionToRemove.examID;
-
-       let findExam =  await Exam.findOne({_id});
-       let size = findExam.questions.length;
-       for(let i = 0 ; i<size;i++){
-           if(findExam.questions[i].equals(questionToRemove._id)){
-               findExam.questions.splice(i,1);
-           }
-       }
-       await findExam.save();
+        if(_id){
+            let findExam =  await Exam.findOne({_id});
+            let size = findExam.questions.length;
+            for(let i = 0 ; i<size;i++){
+                if(findExam.questions[i].equals(questionToRemove._id)){
+                    findExam.questions.splice(i,1);
+                }
+            }
+            await findExam.save();
+        }
        res.json({message:"removed question"});
     }
     }catch(err){
@@ -116,5 +118,9 @@ exports.getByExam = async(req,res)=>{
         res.status(500).json({message:err.message});
     }
 
+};
+
+exports.getFromApi = async (req,res)=>{
+    res.render('controlpanel');
 };
 

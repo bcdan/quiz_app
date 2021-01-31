@@ -21,6 +21,9 @@ dotenv.config({path: './config/config.env' });
 connectDB();
 
 app.use(expressLayouts);
+//Static folder
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname,'assets')));
 
 //Body parser
 app.use(bodyparser.urlencoded({ extended: false }));
@@ -58,9 +61,7 @@ app.use((req, res, next) => {
 });
 
 
-//Static folder
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname,'assets')));
+
 
 
 //Routes

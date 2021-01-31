@@ -19,6 +19,7 @@ router.put('/:id',QuestionsController.updateQuestion);
 //delete a question
 router.delete('/:id',QuestionsController.deleteQuestion);
 
+router.get('/getquestions/api',QuestionsController.getFromApi);
 
 
 

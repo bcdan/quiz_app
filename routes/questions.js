@@ -19,7 +19,14 @@ router.put('/:id',QuestionsController.updateQuestion);
 //delete a question
 router.delete('/:id',QuestionsController.deleteQuestion);
 
-router.get('/getquestions/api',QuestionsController.getFromApi);
+//get questions from external api
+
+router.get('/api/get',QuestionsController.getFromApi);
+
+//add bulk of questions from external api
+
+router.post('/api/post',QuestionsController.addBulk);
+
 
 
 

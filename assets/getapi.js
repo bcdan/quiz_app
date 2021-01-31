@@ -11,9 +11,43 @@ var ExamToApi = {};
         }).then((response) => response.json())
      };
 
-      function parseJSON(array){
+    //   function parseJSON(array){
+    //     let Exam  = {};
+    //     Exam["questions"] = array.map(function(item){
+    //        let question = {};
+    //        question["title"]=item.question;
+    //        question["choices"]=[];
+    //        question["examID"]=ExamToApi._id;
+    //        for(const [key,value] of Object.entries(item.answers)){
+    //            if(value!=null){
+    //                    if(key==item["correct_answer"]){
+    //                        question["choices"].push({text:value,isCorrect:true});
+    //                    }else{
+    //                        question["choices"].push({text:value,isCorrect:false});
+    //                    }
+    //            }
+    //        }
+    //        return question;
+    //    });
+    //    let answers = array.map(function(question){
+    //        return question.correct_answers
+    //    }).map(function(ans){return Object.values(ans)});
+    //    let answersIndecies = [];
+    //    answers.forEach(ansArray=>answersIndecies.push(ansArray.indexOf("true")));
+   
+    //    for(let i = 0 ; i< Exam["questions"].length ; i++){
+    //        if(answersIndecies[i]==-1)
+    //            continue;
+    //        Exam["questions"][i].choices[answersIndecies[i]].isCorrect=true;
+    //    }
+    //    return Exam;
+    // }
+
+
+
+    function parseJSON(array){
         let Exam  = {};
-        Exam["questions"] = array.map(function(item){
+        Exam = array.map(function(item){
            let question = {};
            question["title"]=item.question;
            question["choices"]=[];
@@ -35,14 +69,13 @@ var ExamToApi = {};
        let answersIndecies = [];
        answers.forEach(ansArray=>answersIndecies.push(ansArray.indexOf("true")));
    
-       for(let i = 0 ; i< Exam["questions"].length ; i++){
+       for(let i = 0 ; i< Exam.length ; i++){
            if(answersIndecies[i]==-1)
                continue;
-           Exam["questions"][i].choices[answersIndecies[i]].isCorrect=true;
+           Exam[i].choices[answersIndecies[i]].isCorrect=true;
        }
        return Exam;
     }
-
 
     function postToMyAPI(question) {
         fetch('http://localhost:3000/questions', {
@@ -66,8 +99,13 @@ var ExamToApi = {};
         ExamToApi["title"]="Linux";
         ExamToApi["duration"]=60;
         ExamToApi["date"]=Date.now;
+        console.log(JSON.stringify(ExamToApi))
        return fetch('http://localhost:3000/exams', {
           method: 'post',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
           body: JSON.stringify(ExamToApi)
         }).then((response) => response.json())
       };
@@ -77,12 +115,30 @@ var ExamToApi = {};
       function getQuestionsAfterExam(){
           return Promise.all([initExamToApi(), getQuestionsFromExternalAPI()]);
       }
+       function getRandomExam(){
+        getQuestionsAfterExam().then(([exam,array])=>{
+            ExamToApi["_id"]=exam["_id"];
+              let examTemp = parseJSON(array);
+              postBulk(examTemp);
+  
+          });
+      }
 
-      getQuestionsAfterExam().then(([exam,array])=>{
-          ExamToApi["_id"]=exam["_id"];
-            let examTemp = parseJSON(array);
-            examTemp.questions.forEach(q=>{
-                postToMyAPI(q)
-            });
 
-        });
+    async  function postBulk(bulkOfQuestions){
+       let resp = await fetch('http://localhost:3000/questions/api/post', {
+            method: 'post',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body : JSON.stringify(bulkOfQuestions)
+      });
+      if(!resp.ok){
+          console.log("error fetchin");
+      }else{
+          return await resp.json();
+
+      }
+      
+    }

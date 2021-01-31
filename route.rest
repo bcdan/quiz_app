@@ -11,33 +11,74 @@ GET http://localhost:3000/questions/6012f0f141e36c4a88b02e60
 ###
 
 
+POST http://localhost:3000/questions/api/post
+Content-Type: application/json 
+
+[
+{
+    "title":"mock",
+    "examID":"601581a78b1f87396d982259",
+        "choices":[
+        {"text":"prog language","isCorrect":false},
+        {"text":"second","isCorrect":true},
+        {"text":"third","isCorrect":false}
+    ],
+    "points":30
+
+},
+   { 
+       "title":"mock 2?",
+           "examID":"601581a78b1f87396d982259",
+        "choices":[
+        {"text":"prog language","isCorrect":false},
+        {"text":"second","isCorrect":true},
+        {"text":"third","isCorrect":false}
+    ],
+    "points":30
+    }
+
+]
+
+
+
+###
+
 POST http://localhost:3000/questions
 Content-Type: application/json 
 
 {
-    "choices":[
-        {"text":"choice a","isCorrect":false},
-        {"text":"choice b","isCorrect":true},
-        {"text":"choice c","isCorrect":false}
-    ],
-    "title":"some question",
-    "points":20
-
+    "title":"What does the /etc/hosts file contains?",
+        "choices":[
+            {"text":"Hostnames of all devices on the network segment","isCorrect":false},
+            {"text":"The IP address of the default gateway","isCorrect":false},
+            {"text":"CPU and memory info","isCorrect":false},
+            {"text":"IP addresses to hostnames mappings","isCorrect":true}
+        ]
 }
 
+
+
+
 ###
+
+GET http://localhost:3000/questions/byexam/601584175e30003c042f7f7d
+
+###
+
+
 
 GET http://localhost:3000/exams
 
 ###
-DELETE http://localhost:3000/questions/601571ef9677513879d927a6
+DELETE http://localhost:3000/questions/6016db4e629a3d63282cf797
+
 
 ###
 POST http://localhost:3000/exams
 Content-Type:application/json
 
 {
-    "title":"Java exam",
+    "title":"C++ exam",
     "duration":60
 }
 
@@ -57,3 +98,10 @@ Content-Type: application/json
   "lastName": "nir",
   "username": "avinir2020"
 }
+
+
+###
+GET http://localhost:3000/questions/getquestions/api
+
+###
+DELETE http://localhost:3000/exams/6016a4178f3c5233e8b62ef0

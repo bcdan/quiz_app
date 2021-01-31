@@ -91,8 +91,8 @@ exports.deleteQuestion = async (req,res)=>{
         if(_id){
             let findExam =  await Exam.findOne({_id});
             let size = findExam.questions.length;
-            for(let i = 0 ; i<size;i++){
-                if(findExam.questions[i].equals(questionToRemove._id)){
+            for(let i = size-1 ; i>=0;i--){
+                if(!await Question.exists({_id:findExam.questions[i]})|| findExam.questions[i].equals(questionToRemove._id)){
                     findExam.questions.splice(i,1);
                 }
             }
@@ -122,5 +122,35 @@ exports.getByExam = async(req,res)=>{
 
 exports.getFromApi = async (req,res)=>{
     res.render('controlpanel');
+};
+
+exports.addBulk = async (req,res)=>{
+
+    const array = req.body;
+    console.log(array);
+    try{
+        for(const questionReceived of array){
+            const question = new Question({
+                examID:questionReceived.examID,
+                choices:questionReceived.choices,
+                title:questionReceived.title,
+                points:questionReceived.points
+            });
+    
+            const newQuestion = await question.save();
+            const _id = question.examID;
+            if(_id){
+                const examToUpdate = await Exam.findById({_id});
+                examToUpdate.questions.push(newQuestion);
+                await examToUpdate.save();
+            }
+        }
+
+    res.status(201).json({message:"added bulk of questions"});
+    
+}catch(err){
+    res.status(400).json({message:err.message});
+}
+
 };
 

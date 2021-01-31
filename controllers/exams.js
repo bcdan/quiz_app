@@ -1,16 +1,27 @@
 const Exam = require('../models/Exam');
+const Question = require('../models/Question');
 
 exports.getExams = async (req,res)=>{
 
     try{
         const exams = await Exam.find();
-        res.status(200).json(exams);
+        for(let exam of exams){
+            for(let i = exam.questions.length-1 ; i >=0;i--){
+                if(!await Question.exists({_id:exam.questions[i]})){
+                    exam.questions.splice(i,1);
+                }
+            }
+            await exam.save();
+        }
+            res.status(200).json(exams);
+
     }catch(err){
         res.status(500).json({message:err.message});
     }
 };
 
 exports.addExam = async (req,res)=>{
+    console.log(req.body);
     const exam = new Exam({
         title:req.body.title,
         teacherID:req.body.teacherID,

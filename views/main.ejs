@@ -1,0 +1,35 @@
+<script src="/exam.js" async></script>
+
+<div class="jumbotron text-center">
+    <div class="container">
+      <h1 class="display-4">Welcome</h1>
+      <p class="lead">You may log in as a teacher or take an exam as a student - below</p>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-md-6 m-auto">
+      	<div class="card card-body" id="admin_body">
+			<div class="row mt-5">
+				<div class="col-md-6 m-auto">
+						<h1 class="text-center mb-3"> Teachers Login</h1>
+						<div class="text-center">
+							<form action="/teachers/login" method="GET">
+								<p><button type="submit" class="btn btn-primary btn-block" >Go to log-in page</button></p>
+							</form>
+						</div>
+                </div>
+                <div class="col-md-6 m-auto">
+                    <h1 class="text-center mb-3"> Take an exam </h1>
+                    <div class="text-center">
+                      <form id="examform" data-toggle="popover" data-content="Click anywhere in the document to close this popover">
+                        <label for="examid">Exam id:</label><br>
+                        <input type="text" id="examid"><br>
+                        <p><button type="submit" class="btn btn-primary btn-block" >Take exam</button></p>
+                      </form>
+                    </div>
+                </div>
+			</div>
+      	</div>
+	</div>
+</div>

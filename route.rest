@@ -71,7 +71,7 @@ GET http://localhost:3000/exams
 
 ###
 
-GET http://localhost:3000/exams/6016f1d20980997afe7a49a9
+GET http://localhost:3000/exams/6017112eb0033f9c71e85a76
 ###
 DELETE http://localhost:3000/questions/6016f1d30980997afe7a49ad
 

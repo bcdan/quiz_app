@@ -1,4 +1,4 @@
-<script src="/exam.js" async></script>
+
 
 <div class="jumbotron text-center">
     <div class="container">
@@ -15,18 +15,16 @@
 						<h1 class="text-center mb-3"> Teachers Login</h1>
 						<div class="text-center">
 							<form action="/teachers/login" method="GET">
-								<p><button type="submit" class="btn btn-primary btn-block" >Go to log-in page</button></p>
+								<p><button type="submit" class="btn btn-primary btn-block" >Log in as teacher</button></p>
 							</form>
 						</div>
                 </div>
                 <div class="col-md-6 m-auto">
                     <h1 class="text-center mb-3"> Take an exam </h1>
+                    <form action="/exams/start/studentform" method="GET">
+                      <p><button type="submit" class="btn btn-primary btn-block" >Continue as student</button></p>
+                    </form>
                     <div class="text-center">
-                      <form id="examform" data-toggle="popover" data-content="Click anywhere in the document to close this popover">
-                        <label for="examid">Exam id:</label><br>
-                        <input type="text" id="examid" required><br>
-                        <p><button type="submit" class="btn btn-primary btn-block" >Take exam</button></p>
-                      </form>
                     </div>
                 </div>
 			</div>

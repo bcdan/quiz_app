@@ -14,9 +14,9 @@ const StudentSchema = new mongoose.Schema({
         },
         score:{
             type:Number,
-            default:0,
             required:false
-        }
+        },
+        _id:false
     }]
 
 });

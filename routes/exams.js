@@ -18,6 +18,10 @@ router.put('/:id',ExamsController.updateExam);
 //delete an exam
 router.delete('/:id',ExamsController.deleteExam);
 
+//post student details 
+router.post('/start/postdetails',ExamsController.postStudentDetails);
+
+router.get('/start/studentform',ExamsController.getStudentExamForm);
 
 
 

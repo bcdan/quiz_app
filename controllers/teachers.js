@@ -105,7 +105,7 @@ exports.handleLogin = ((req,res,next)=>{
 exports.handleLogout = ((req, res) => {
 	req.logOut();
 	req.flash('success_msg', 'You are logged out');
-	res.redirect('/users/login');
+	res.redirect('/teachers/login');
 });
 
 

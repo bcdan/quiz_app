@@ -14,7 +14,10 @@ form.addEventListener('submit',async function getExamFromApi(event){
                 console.log("Error fetching");
                 return;
             }
-            response.json().then(data=>{localStorage.setItem(data._id,JSON.stringify(data))});
+            response.json().then(data=>{
+                localStorage.setItem(data._id,JSON.stringify(data));
+                window.location.replace('/exams');
+            });
        })
 
        

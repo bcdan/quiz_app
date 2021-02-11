@@ -26,8 +26,8 @@ form.addEventListener('submit',async function postToApi(event){
             }
             response.json().then(data=>{
                 console.log(data);
-                //localStorage.setItem(data._id,JSON.stringify(data));
-              //  window.location.replace('/exams');
+                localStorage.setItem(data._id,JSON.stringify(data));
+                window.location.replace('/exams/start/startquiz');
             });
        }).catch(err=>console.log(err));
 
@@ -35,9 +35,12 @@ form.addEventListener('submit',async function postToApi(event){
 });
 
 function myAlert(message){
-    let h = document.getElementById("exam_body");
+    let h = document.getElementById("alertZone");
     let wrapper = document.createElement("div");
-    wrapper.innerHTML=`<div class="alert alert-danger alert-dismissible fade show" role="alert">${message} .<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`
+    wrapper.innerHTML=`<div class="alert alert-danger alert-dismissible fade show" role="alert">${message} <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`
     h.appendChild(wrapper);
 }
+
+
+
 

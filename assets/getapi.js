@@ -55,10 +55,11 @@ function postToMyAPI(question) {
     });
 }
 
-function initExamToApi() {
+function initExamToApi(teacherID) {
   ExamToApi["title"] = "Linux";
   ExamToApi["duration"] = 60;
   ExamToApi["date"] = Date.now;
+  ExamToApi["teacherID"]=teacherID;
   console.log(JSON.stringify(ExamToApi));
   return fetch("http://localhost:3000/exams", {
     method: "post",
@@ -70,11 +71,11 @@ function initExamToApi() {
   }).then((response) => response.json());
 }
 
-function getQuestionsAfterExam() {
-  return Promise.all([initExamToApi(), getQuestionsFromExternalAPI()]);
+function getQuestionsAfterExam(teacherID) {
+  return Promise.all([initExamToApi(teacherID), getQuestionsFromExternalAPI()]);
 }
-function getRandomExam() {
-  getQuestionsAfterExam().then(([exam, array]) => {
+function getRandomExam(teacherID) {
+  getQuestionsAfterExam(teacherID).then(([exam, array]) => {
     ExamToApi["_id"] = exam["_id"];
     let examTemp = parseJSON(array);
     postBulk(examTemp);
@@ -96,3 +97,5 @@ async function postBulk(bulkOfQuestions) {
     return await resp.json();
   }
 }
+
+

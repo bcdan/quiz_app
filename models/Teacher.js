@@ -16,6 +16,11 @@ const TeacherSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
+	exams:[{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'Exam',
+            required:false
+    }]
 	
 	
 

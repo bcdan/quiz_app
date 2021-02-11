@@ -1,3 +1,13 @@
-h1{
-    color:red
+/*---------Exam CSS--------*/
+.questionBlock{
+    margin-top: 20px;
+}
+.choice-block{
+    padding-left:3rem;
+}
+
+
+/*Dashboard*/
+.container-fluid{
+    font-size: 1.25rem;
 }

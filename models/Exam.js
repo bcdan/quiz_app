@@ -6,7 +6,8 @@ const ExamSchema = new mongoose.Schema({
         required:false
     },
     teacherID:{
-        type:String,
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Teacher',
         required:false
     },
     duration:{

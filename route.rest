@@ -2,6 +2,8 @@ GET http://localhost:3000/questions
 
 ###
 
+GET http://localhost:3000/questions/60242b23da4da5dbf68fc024
+###
 PUT http://localhost:3000/questions/6012f4ad44967a4c8c53ab32
 
 
@@ -71,7 +73,7 @@ GET http://localhost:3000/exams
 
 ###
 
-GET http://localhost:3000/exams/6017112eb0033f9c71e85a76
+GET http://localhost:3000/exams/6019712b6627f0243142453b
 ###
 DELETE http://localhost:3000/questions/6016f1d30980997afe7a49ad
 
@@ -81,12 +83,14 @@ POST http://localhost:3000/exams
 Content-Type:application/json
 
 {
-    "title":"C++ exam",
-    "duration":60
+    "title":"teacherAdd exam test55",
+    "duration":60,
+    "teacherID":"6019745802dd5a2914c2fa6e"
+    
 }
 
 ###
-GET http://localhost:3000/teachers/60142585c399b061d18410bb
+GET http://localhost:3000/teachers
 
 ###
 DELETE http://localhost:3000/teachers/601424e547ad99614c093773

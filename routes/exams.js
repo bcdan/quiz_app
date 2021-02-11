@@ -23,6 +23,7 @@ router.post('/start/postdetails',ExamsController.postStudentDetails);
 
 router.get('/start/studentform',ExamsController.getStudentExamForm);
 
+router.get('/start/startquiz',ExamsController.startQuiz);
 
 
 module.exports = router;

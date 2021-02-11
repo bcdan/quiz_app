@@ -1,33 +1,40 @@
-
-
 <div class="jumbotron text-center">
-    <div class="container">
-      <h1 class="display-4">Welcome</h1>
-      <p class="lead">You may log in as a teacher or take an exam as a student - below</p>
+  <div class="container">
+    <h1 class="display-4">Welcome</h1>
+    <p class="lead">You may log in as a teacher or take an exam as a student - below</p>
+  </div>
+</div>
+
+<div class="row mt-5">
+  <div class="col-md-6 m-auto">
+    <div class="card card-body" id="admin_body">
+      <div class="row mt-5">
+        <%if(user){%>
+        <div class="col-md-6 m-auto">
+          <h1 class="text-center mb-3"> Hello <%=user.firstName%> <%=user.lastName%> </h1>
+          <div class="text-center">
+            <form action="/dashboard" method="GET">
+              <p><button type="submit" class="btn btn-primary btn-block">Dashboard</button></p>
+            </form>
+          </div>
+        </div>
+        <%}else{%>
+        <div class="col-md-6 m-auto">
+          <h1 class="text-center mb-3"> Teachers Login</h1>
+          <div class="text-center">
+            <form action="/teachers/login" method="GET">
+              <p><button type="submit" class="btn btn-primary btn-block">Log in as teacher</button></p>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-6 m-auto">
+          <h1 class="text-center mb-3"> Take an exam </h1>
+          <form action="/exams/start/studentform" method="GET">
+            <p><button type="submit" class="btn btn-primary btn-block">Continue as student</button></p>
+          </form>
+        </div>
+      </div>
+      <%}%>
     </div>
   </div>
-
-  <div class="row mt-5">
-    <div class="col-md-6 m-auto">
-      	<div class="card card-body" id="admin_body">
-			<div class="row mt-5">
-				<div class="col-md-6 m-auto">
-						<h1 class="text-center mb-3"> Teachers Login</h1>
-						<div class="text-center">
-							<form action="/teachers/login" method="GET">
-								<p><button type="submit" class="btn btn-primary btn-block" >Log in as teacher</button></p>
-							</form>
-						</div>
-                </div>
-                <div class="col-md-6 m-auto">
-                    <h1 class="text-center mb-3"> Take an exam </h1>
-                    <form action="/exams/start/studentform" method="GET">
-                      <p><button type="submit" class="btn btn-primary btn-block" >Continue as student</button></p>
-                    </form>
-                    <div class="text-center">
-                    </div>
-                </div>
-			</div>
-      	</div>
-	</div>
 </div>

@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
 const Exam = require("../models/Exam");
 const Question = require("../models/Question");
 const Student = require("../models/Student");
+const Teacher = require("../models/Teacher")
 
 exports.getExams = async (req, res) => {
   try {
@@ -31,6 +31,13 @@ exports.addExam = async (req, res) => {
   });
   try {
     const newExam = await exam.save();
+    const _id = exam.teacherID;
+    if(_id){
+        const teacherToUpdate = await Teacher.findById({_id});
+        console.log(teacherToUpdate);
+        teacherToUpdate.exams.push(newExam);
+        await teacherToUpdate.save();
+    }    
     res.status(201).json(newExam);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -97,60 +104,7 @@ exports.getStudentExamForm = async (req, res) => {
   res.render("exam");
 };
 
-// exports.postStudentDetails = async(req,res)=>{
-//     try {
-//         const {studentid , examid } = req.body;
-//         console.log("Called with ",studentid,examid);
-//         if(!studentid || !examid){
-//            // errors.push({msg:'Please enter all fields'});
-//             res.status(404).json({msg:'Please enter all fields'});
-//         }else{
-//             Student.findOne({studentID : studentid}).then(student=>{
-//                 if(student){
-//                     if(student.exams.some(exam=>exam.examID==examid)){
-//                         res.status(404).json({msg:'You already took this exam'});
-//                     }else{
 
-//                     }
-//                 }else{
-//                     console.log("no student");
-//                     const newStudent = new Student({
-//                         studentID:studentid,
-//                         exams:[{examID:examid,score:0}]
-//                     });
-//                     Exam.findOne({_id:examid}).then(exam=>{
-//                         if(exam){
-//                             newStudent.save()
-//                             .then(()=>{
-//                                 //req.flash('Good luck');
-//                                 res.json(exam);
-//                             })
-//                             .catch(err=>console.log(err));
-
-//                         }else{
-//                             res.json({msg:"no such test"});
-//                             //res.render('exam',{errors});
-//                         }
-//                     })
-//                     .catch(err=>console.log(err));
-//                 }
-//             })
-//         }
-
-//     } catch (error) {
-
-//     }
-// };
-
-// function isValidObjectId(value) {
-//     // If value is an object (ObjectId) cast it to a string
-//     var valueString = typeof value === "string" ? value : String(value);
-
-//     // Cast the string to ObjectId
-//     var idInstance = new ObjectId(valueString);
-
-//     return String(idInstance) === valueString;
-//   }
 
 exports.postStudentDetails = async (req, res) => {
   const {
@@ -169,7 +123,7 @@ exports.postStudentDetails = async (req, res) => {
     console.log("Documentid", documentId);
     if (!documentId) {
       console.log("not valid id, exiting");
-      res.status(404).json({ msg: "Invalid exam id!" });
+      res.status(404).json({ msg: "Invalid exam id! " });
     } else {
       if (!studentid || !examid) {
         res.status(404).json({ msg: "Please enter all fields" });
@@ -209,4 +163,11 @@ exports.postStudentDetails = async (req, res) => {
       }
     }
   } catch (error) {}
+};
+
+
+exports.startQuiz = (req,res)=>{
+
+  res.render('startquiz');
+
 };

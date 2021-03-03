@@ -1,7 +1,7 @@
 const Exam = require("../models/Exam");
 const Question = require("../models/Question");
 const Student = require("../models/Student");
-const Teacher = require("../models/Teacher")
+const Teacher = require("../models/Teacher");
 
 exports.getExams = async (req, res) => {
   try {
@@ -32,12 +32,12 @@ exports.addExam = async (req, res) => {
   try {
     const newExam = await exam.save();
     const _id = exam.teacherID;
-    if(_id){
-        const teacherToUpdate = await Teacher.findById({_id});
-        console.log(teacherToUpdate);
-        teacherToUpdate.exams.push(newExam);
-        await teacherToUpdate.save();
-    }    
+    if (_id) {
+      const teacherToUpdate = await Teacher.findById({ _id });
+      console.log(teacherToUpdate);
+      teacherToUpdate.exams.push(newExam);
+      await teacherToUpdate.save();
+    }
     res.status(201).json(newExam);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -93,7 +93,8 @@ exports.deleteExam = async (req, res) => {
     if (exam.deletedCount === 0) {
       res.status(404).json();
     } else {
-      res.json({ message: "removed exam" });
+      req.flash("success_msg", "Successfuly deleted");
+      res.redirect(`/teachers/myexams/${req.user.id}`);
     }
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -103,8 +104,6 @@ exports.deleteExam = async (req, res) => {
 exports.getStudentExamForm = async (req, res) => {
   res.render("exam");
 };
-
-
 
 exports.postStudentDetails = async (req, res) => {
   const {
@@ -165,9 +164,10 @@ exports.postStudentDetails = async (req, res) => {
   } catch (error) {}
 };
 
+exports.startQuiz = (req, res) => {
+  res.render("startquiz");
+};
 
-exports.startQuiz = (req,res)=>{
-
-  res.render('startquiz');
-
+exports.getByTeacher = (req, res) => {
+  res.json({ exams: res.exams });
 };

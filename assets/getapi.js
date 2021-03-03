@@ -78,8 +78,12 @@ function getRandomExam(teacherID) {
   getQuestionsAfterExam(teacherID).then(([exam, array]) => {
     ExamToApi["_id"] = exam["_id"];
     let examTemp = parseJSON(array);
-    postBulk(examTemp);
+    postBulk(examTemp).then(res=>{
+      location.reload();
+    });
   });
+  alert("Random exam added successfully!")
+
 }
 
 async function postBulk(bulkOfQuestions) {
@@ -97,5 +101,13 @@ async function postBulk(bulkOfQuestions) {
     return await resp.json();
   }
 }
+
+function alert(message){
+  let h = document.getElementById("alert");
+  let wrapper = document.createElement("div");
+  wrapper.innerHTML=`<div class="alert alert-success alert-dismissible fade show" role="alert">${message} <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`
+  h.appendChild(wrapper);
+}
+
 
 

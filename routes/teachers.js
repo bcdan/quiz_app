@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const TeachersController = require('../controllers/teachers');
 const { ensureNotAuthenticated , ensureAuthenticated } = require('../config/auth');
+const {getExamsByTeacher} = require('./middlewares');
 
 // Login Page
 router.get('/login', ensureNotAuthenticated,TeachersController.getLoginPage );
@@ -18,6 +19,8 @@ router.post('/login',ensureNotAuthenticated, TeachersController.handleLogin);
 //logout handle
 router.get('/logout', TeachersController.handleLogout);
 
+//teacher's exams page on dashboard
+router.get('/myexams/:id',getExamsByTeacher,TeachersController.myExams);
 
 //GET all Teachers
 router.get('/',TeachersController.getTeachers);
@@ -31,6 +34,7 @@ router.put('/:id',TeachersController.updateTeacher);
 
 //delete a teacher
 router.delete('/:id',TeachersController.deleteTeacher);
+
 
 
 

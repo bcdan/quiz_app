@@ -1,0 +1,55 @@
+<script src="/getapi.js" async></script>
+<div class="container">
+    <div class="jumbotron">
+        <%- include ('./partials/messages') %>
+        <div class="text-center">
+            <h1><i class="fas fa-list-ol"></i> Exams list</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <a class="btn btn-info float" href="/dashboard/" role="button"><i class="fas fa-arrow-circle-left"></i>
+                    BACK</a>
+                <button class="btn btn-success float" data-toggle="modal" data-target="#add"><i class="fas fa-plus"></i>
+                    ADD</button>
+                <a class="btn btn-info float"onclick="getRandomExam('<%=user._id%>')">random exam</a>
+                <div id="alert"></div>
+
+            </div>
+
+        </div>
+        <table class="table table-dark table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">#Questions</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i = 0 ; i< exams.length;i++) {%>
+                <tr>
+                    <th scope="row"><%=i%></th>
+                    <td><%=exams[i].title%></td>
+                    <td><%=exams[i].duration%></td>
+                    <td><%=exams[i].date%></td>
+                    <td><%=exams[i].questions.length%></td>
+                    <td>
+                        <form action="/exams/<%=exams[i].id%>" method="POST" id="delete-form">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </div>
+                        </form>
+                        <a class="btn btn-primary" href="#" role="button">Edit and more</a>
+
+                </tr>
+                <%
+                            }
+                          %>
+            </tbody>
+        </table>
+    </div>
+</div>

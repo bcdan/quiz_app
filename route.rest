@@ -9,6 +9,11 @@ PUT http://localhost:3000/questions/6012f4ad44967a4c8c53ab32
 
 ###
 
+
+GET http://localhost:3000/exams/getbyteacher/6019745802dd5a2914c2fa6e
+
+###
+
 GET http://localhost:3000/questions/6012f0f141e36c4a88b02e60
 ###
 
@@ -63,7 +68,7 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3000/questions/byexam/601584175e30003c042f7f7d
+GET http://localhost:3000/questions/byexam/6024ea0ac24cce10f4a4830a
 
 ###
 

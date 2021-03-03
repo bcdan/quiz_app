@@ -9,6 +9,7 @@ const connectDB = require('./config/db');
 const expressLayouts = require('express-ejs-layouts');
 const passport = require('passport');
 const bodyparser = require('body-parser');
+const methodOverride = require('method-override');
 const app = express();
 
 //passport config
@@ -29,6 +30,14 @@ app.use(express.static(path.join(__dirname,'assets')));
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 app.set('view engine', 'ejs');
+
+app.use(methodOverride(function(req,res){
+	if(req.body && typeof req.body === 'object' && '_method' in req.body){
+		let method = req.body._method;
+		delete req.body._method;
+		return method;
+	}
+}));
 
 //Express session
 app.use(session({

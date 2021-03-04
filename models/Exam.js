@@ -15,8 +15,9 @@ const ExamSchema = new mongoose.Schema({
         required:false
     },
     date:{
-        type:Date,
-        required:false
+        type:String,
+        required:false,
+        default : (new Date()).toLocaleDateString('he-IL')
     },
     questions:[{
         type:mongoose.Schema.Types.ObjectId,

@@ -9,9 +9,11 @@
             <div class="col-md-12 text-right">
                 <a class="btn btn-info float" href="/dashboard/" role="button"><i class="fas fa-arrow-circle-left"></i>
                     BACK</a>
-                <button class="btn btn-success float" data-toggle="modal" data-target="#add"><i class="fas fa-plus"></i>
+                <button class="btn btn-success float" data-toggle="modal" data-target="#staticBackdrop"><i
+                        class="fas fa-plus"></i>
                     ADD</button>
-                <a class="btn btn-info float"onclick="getRandomExam('<%=user._id%>')">random exam</a>
+                <a class="btn btn-warning float" onclick="getRandomExam('<%=user._id%>')"><i class="fas fa-random"></i>
+                    random exam</a>
                 <div id="alert"></div>
 
             </div>
@@ -31,7 +33,7 @@
             <tbody>
                 <% for(let i = 0 ; i< exams.length;i++) {%>
                 <tr>
-                    <th scope="row"><%=i%></th>
+                    <th scope="row"><%=i+1%></th>
                     <td><%=exams[i].title%></td>
                     <td><%=exams[i].duration%></td>
                     <td><%=exams[i].date%></td>
@@ -51,5 +53,59 @@
                           %>
             </tbody>
         </table>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Add exam</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addExamForm">
+                    <div class="form-group">
+                        <label for="examTitle">Title</label>
+                        <input type="text" class="form-control" id="examTitle" placeholder="Exam title"
+                            aria-describedby="examTitle" required
+                            oninvalid="this.setCustomValidity('Please enter a title')" oninput="setCustomValidity('')">
+                        <small id="examHelp" class="form-text text-muted">Exam's title</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="duration">Duration</label>
+                        <input type="number" class="form-control" placeholder="Exam duration" id="duration" min=0
+                            aria-describedby="duration" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select class="form-control" id="category">
+                            <option>Linux</option>
+                            <option>SQL</option>
+                            <option>Code</option>
+                            <option>DevOps</option>
+                            <option>Docker</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="difficulty">Difficulty</label>
+                        <select class="form-control" id="difficulty">
+                            <option>Easy</option>
+                            <option>Medium</option>
+                            <option>Hard</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="<%=user._id%>" >Add</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
     </div>
 </div>

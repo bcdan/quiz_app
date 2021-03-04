@@ -1,8 +1,15 @@
+
 var ExamToApi = {};
 
-function getQuestionsFromExternalAPI() {
+const categories = ["Linux","Code","SQL","DevOps","Docker"];
+const durations = [15,30,45,60,90];
+const difficulties = ["easy","medium","hard"];
+
+
+
+function getQuestionsFromExternalAPI(category,difficulty) {
   return fetch(
-    "https://quizapi.io/api/v1/questions?apiKey=bB5wg05TlOfAPpoDCMJQT7Zd3u1gkp2afISs1nK1&limit=4&category=Linux&multiple_correct_answers=false",
+    `https://quizapi.io/api/v1/questions?apiKey=bB5wg05TlOfAPpoDCMJQT7Zd3u1gkp2afISs1nK1&limit=4&category=${category}&multiple_correct_answers=false&difficulty=${difficulty}`,
     {
       headers: {
         "Content-Type": "application/json",
@@ -15,6 +22,7 @@ function getQuestionsFromExternalAPI() {
 function parseJSON(array) {
   let Exam = {};
   array.forEach((question) => {
+    console.log(question);
     question.correct_answer = Object.entries(question.correct_answers)
       .filter((ans) => ans[1] == "true")[0][0]
       .substring(0, 8);
@@ -55,10 +63,9 @@ function postToMyAPI(question) {
     });
 }
 
-function initExamToApi(teacherID) {
-  ExamToApi["title"] = "Linux";
-  ExamToApi["duration"] = 60;
-  ExamToApi["date"] = Date.now;
+function initExamToApi(teacherID,title,duration) {
+  ExamToApi["title"] = title;
+  ExamToApi["duration"] = duration;
   ExamToApi["teacherID"]=teacherID;
   console.log(JSON.stringify(ExamToApi));
   return fetch("http://localhost:3000/exams", {
@@ -71,11 +78,12 @@ function initExamToApi(teacherID) {
   }).then((response) => response.json());
 }
 
-function getQuestionsAfterExam(teacherID) {
-  return Promise.all([initExamToApi(teacherID), getQuestionsFromExternalAPI()]);
+function getQuestionsAfterExam(teacherID,title,duration,category,difficulty) {
+  return Promise.all([initExamToApi(teacherID,title,duration), getQuestionsFromExternalAPI(category,difficulty)]);
 }
 function getRandomExam(teacherID) {
-  getQuestionsAfterExam(teacherID).then(([exam, array]) => {
+  let randomCategory = randomizeParams(categories);
+  getQuestionsAfterExam(teacherID,randomCategory,randomizeParams(durations),randomCategory,randomizeParams(difficulties)).then(([exam, array]) => { // add randomized title,duration,category,difficulty
     ExamToApi["_id"] = exam["_id"];
     let examTemp = parseJSON(array);
     postBulk(examTemp).then(res=>{
@@ -83,7 +91,11 @@ function getRandomExam(teacherID) {
     });
   });
   alert("Random exam added successfully!")
+}
 
+function randomizeParams(array){
+  let randomElement = array[Math.floor(Math.random() * array.length)];
+  return randomElement;
 }
 
 async function postBulk(bulkOfQuestions) {
@@ -101,6 +113,26 @@ async function postBulk(bulkOfQuestions) {
     return await resp.json();
   }
 }
+
+
+const form = document.getElementById("addExamForm");
+form.addEventListener('submit', function customExam(event){
+  event.preventDefault();
+  const teacherID=event.submitter.id;
+  const title =  document.querySelector('#examTitle').value;
+  const duration = document.querySelector('#duration').value;
+  const category = document.querySelector('#category').value;
+  const difficulty = document.querySelector('#difficulty').value.toLowerCase();
+  getQuestionsAfterExam(teacherID,title,duration,category,difficulty).then(([exam, array]) => {
+    ExamToApi["_id"] = exam["_id"];
+    let examTemp = parseJSON(array);
+    postBulk(examTemp).then(res=>{
+      location.reload();
+    });
+  });
+  alert("Exam added successfully!")
+    
+});
 
 function alert(message){
   let h = document.getElementById("alert");

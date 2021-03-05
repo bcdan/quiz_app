@@ -2,7 +2,7 @@ GET http://localhost:3000/questions
 
 ###
 
-GET http://localhost:3000/questions/60242b23da4da5dbf68fc024
+GET http://localhost:3000/questions/60242b23da4da5dbf68fc026
 ###
 PUT http://localhost:3000/questions/6012f4ad44967a4c8c53ab32
 
@@ -14,7 +14,7 @@ GET http://localhost:3000/exams/getbyteacher/6019745802dd5a2914c2fa6e
 
 ###
 
-GET http://localhost:3000/questions/6012f0f141e36c4a88b02e60
+GET http://localhost:3000/questions/
 ###
 
 
@@ -76,9 +76,15 @@ GET http://localhost:3000/questions/byexam/6024ea0ac24cce10f4a4830a
 
 GET http://localhost:3000/exams
 
+
+
+###
+DELETE http://localhost:3000/exams/6041fef531e9921dfefcea20
+
 ###
 
-GET http://localhost:3000/exams/6019712b6627f0243142453b
+
+GET http://localhost:3000/exams/6041fdd3630be81cfcd7e901
 ###
 DELETE http://localhost:3000/questions/6016f1d30980997afe7a49ad
 
@@ -95,7 +101,7 @@ Content-Type:application/json
 }
 
 ###
-GET http://localhost:3000/teachers
+GET http://localhost:3000/teachers/6019745802dd5a2914c2fa6e
 
 ###
 DELETE http://localhost:3000/teachers/601424e547ad99614c093773
@@ -115,5 +121,3 @@ Content-Type: application/json
 ###
 GET http://localhost:3000/questions/getquestions/api
 
-###
-DELETE http://localhost:3000/exams/6016a4178f3c5233e8b62ef0

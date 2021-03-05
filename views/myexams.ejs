@@ -1,4 +1,9 @@
 <script src="/getapi.js" async></script>
+<div id="spinner-back"></div>
+<div id="spinner-front">
+  <img src="/spinner.gif"/><br>
+  Now loading...
+</div>
 <div class="container">
     <div class="jumbotron">
         <%- include ('./partials/messages') %>
@@ -45,7 +50,7 @@
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </div>
                         </form>
-                        <a class="btn btn-primary" href="#" role="button">Edit and more</a>
+                        <a class="btn btn-primary" href="/teachers/editexam/<%=exams[i].id%>" role="button">Edit and more</a>
 
                 </tr>
                 <%

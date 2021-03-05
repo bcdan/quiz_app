@@ -1,4 +1,3 @@
-const { findOneAndRemove } = require("../models/Exam");
 const Exam = require("../models/Exam");
 const Question = require("../models/Question");
 const Student = require("../models/Student");
@@ -90,18 +89,18 @@ exports.updateExam = async (req, res) => {
 exports.deleteExam = async (req, res) => {
   try {
     const _id = req.params.id;
-    const exam = await Exam.findOneAndRemove({_id});
+    const exam = await Exam.findOneAndRemove({ _id });
     if (exam.deletedCount === 0) {
       res.status(404).json();
     } else {
-      const questions = await Question.deleteMany({examID:_id});
-      const teacher = await Teacher.findById({_id:exam.teacherID});
-        for (let i = teacher.exams.length - 1; i >= 0; i--) {
-          if (teacher.exams[i]==exam.id) {
-            teacher.exams.splice(i, 1);
-          }
+      const questions = await Question.deleteMany({ examID: _id });
+      const teacher = await Teacher.findById({ _id: exam.teacherID });
+      for (let i = teacher.exams.length - 1; i >= 0; i--) {
+        if (teacher.exams[i] == exam.id) {
+          teacher.exams.splice(i, 1);
         }
-        await teacher.save();
+      }
+      await teacher.save();
       req.flash("success_msg", "Successfuly deleted");
       res.redirect(`/teachers/myexams/${req.user.id}`);
     }

@@ -11,3 +11,38 @@
 .container-fluid{
     font-size: 1.25rem;
 }
+
+
+
+
+
+/* [FULL SCREEN SPINNER] */
+#spinner-back, #spinner-front {
+    position: fixed;
+    width: 100vw;
+    transition: all 1s;
+    visibility: hidden;
+    opacity: 0;
+  }
+  #spinner-back {
+    z-index: 998;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0);
+  }
+  #spinner-front {
+    z-index: 999;
+    color: #fff;
+    text-align: center;
+    margin-top: 50vh;
+    transform: translateY(-50%);
+  }
+  #spinner-back.show, #spinner-front.show {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  /* [DOES NOT QUITE MATTER] */
+  html, body {
+    margin: 0;
+    padding: 0;
+  }

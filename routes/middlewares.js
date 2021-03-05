@@ -23,5 +23,20 @@ module.exports = {
         }
         res.exams = exams;
         next();
+    },
+    getSingleExam: async function(req,res,next){
+        let exam;
+        try{
+            exam = await Exam.findById(req.params.id);
+            if(!exam){
+                return res.status(404).json({msg:'Cannot find exam'});
+            }
+        }catch(err){
+            return res.status(500).json({
+                message:err.message
+            });
+        }
+        res.exam=exam;
+        next();
     }
 }

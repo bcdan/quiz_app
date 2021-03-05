@@ -79,6 +79,7 @@ function initExamToApi(teacherID,title,duration) {
 }
 
 function getQuestionsAfterExam(teacherID,title,duration,category,difficulty) {
+  show();
   return Promise.all([initExamToApi(teacherID,title,duration), getQuestionsFromExternalAPI(category,difficulty)]);
 }
 function getRandomExam(teacherID) {
@@ -88,9 +89,11 @@ function getRandomExam(teacherID) {
     let examTemp = parseJSON(array);
     postBulk(examTemp).then(res=>{
       location.reload();
+      hide();
+
+      alert("Random exam added successfully!")
     });
   });
-  alert("Random exam added successfully!")
 }
 
 function randomizeParams(array){
@@ -128,6 +131,8 @@ form.addEventListener('submit', function customExam(event){
     let examTemp = parseJSON(array);
     postBulk(examTemp).then(res=>{
       location.reload();
+      hide();
+
     });
   });
   alert("Exam added successfully!")
@@ -141,5 +146,15 @@ function alert(message){
   h.appendChild(wrapper);
 }
 
+
+
+function show(){
+  document.getElementById("spinner-back").classList.add("show");
+  document.getElementById("spinner-front").classList.add("show");
+}
+function hide(){
+  document.getElementById("spinner-back").classList.remove("show");
+  document.getElementById("spinner-front").classList.remove("show");
+}
 
 

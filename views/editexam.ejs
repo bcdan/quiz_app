@@ -28,6 +28,15 @@
                 <label for="date">Date</label>
                 <input type="text" class="form-control" id="date" aria-describedby="date" value="<%=exam.date%>">
             </div>
+            <hr>
+            <% for(let i = 0 ; i< questions.length;i++) {%>
+                <div class="form-group">
+                    <label for="question_<%=i%>">Question</label>
+                    <input type="text" class="form-control" id="question_<%=i%>" aria-describedby="question_<%=i%>" value="<%=questions[i].title%>">
+                  </div>
+      
+            <%}%>
+            <hr>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
 

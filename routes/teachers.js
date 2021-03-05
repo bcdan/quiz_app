@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const TeachersController = require('../controllers/teachers');
 const { ensureNotAuthenticated , ensureAuthenticated } = require('../config/auth');
-const {getExamsByTeacher,getSingleExam} = require('./middlewares');
+const {getExamsByTeacher,getSingleExam,getQuestionsFromExam} = require('./middlewares');
 
 // Login Page
 router.get('/login', ensureNotAuthenticated,TeachersController.getLoginPage );
@@ -23,7 +23,7 @@ router.get('/logout', TeachersController.handleLogout);
 router.get('/myexams/:id',ensureAuthenticated,getExamsByTeacher,TeachersController.myExams);
 
 //edit-exam page
-router.get('/editexam/:id',ensureAuthenticated,getSingleExam,TeachersController.editExam);
+router.get('/editexam/:id',ensureAuthenticated,getSingleExam,getQuestionsFromExam,TeachersController.editExam);
 
 //GET all Teachers
 router.get('/',TeachersController.getTeachers);

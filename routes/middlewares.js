@@ -38,5 +38,22 @@ module.exports = {
         }
         res.exam=exam;
         next();
+    },
+    getQuestionsFromExam: async function(req,res,next){
+        let questions;
+        try{
+            let _id = req.params.id;
+             questions = await Question.find({examID:_id});
+            if(!questions){
+                return res.status(404).json({msg:'No questions for this exam'});
+            }
+            else{console.log(questions);}
+
+    
+        }catch(err){
+            res.status(500).json({message:err.message});
+        }
+        res.questions=questions;
+        next();
     }
 }

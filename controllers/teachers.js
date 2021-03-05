@@ -172,6 +172,5 @@ exports.myExams = (req, res) => {
 };
 
 exports.editExam = (req,res)=>{
-  console.log(res.exam);
-  res.render('editexam',{exam:res.exam});
+  res.render('editexam',{exam:res.exam,questions:res.questions});
 }

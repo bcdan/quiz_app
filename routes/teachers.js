@@ -20,7 +20,7 @@ router.post('/login',ensureNotAuthenticated, TeachersController.handleLogin);
 router.get('/logout', TeachersController.handleLogout);
 
 //teacher's exams page on dashboard
-router.get('/myexams/:id',getExamsByTeacher,TeachersController.myExams);
+router.get('/myexams/:id',ensureAuthenticated,getExamsByTeacher,TeachersController.myExams);
 
 //GET all Teachers
 router.get('/',TeachersController.getTeachers);

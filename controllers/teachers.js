@@ -170,3 +170,5 @@ exports.deleteTeacher = async (req, res) => {
 exports.myExams = (req, res) => {
   res.render("myexams", { exams: res.exams });
 };
+
+

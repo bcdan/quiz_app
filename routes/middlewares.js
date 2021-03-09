@@ -47,7 +47,7 @@ module.exports = {
             if(!questions){
                 return res.status(404).json({msg:'No questions for this exam'});
             }
-            else{console.log(questions);}
+            
 
     
         }catch(err){

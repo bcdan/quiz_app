@@ -13,9 +13,6 @@
 }
 
 
-
-
-
 /* [FULL SCREEN SPINNER] */
 #spinner-back, #spinner-front {
     position: fixed;
@@ -45,4 +42,21 @@
   html, body {
     margin: 0;
     padding: 0;
+  }
+
+
+
+
+  /*Edit exam page*/
+
+  #examtitle,#duration,#date,.form-control.question{
+    color : #000;
+    background-color:#89898d54;
+  }
+  #editExam{
+    color:#000;
+  }
+
+  .card.mb-3.question{
+    color:#000;
   }

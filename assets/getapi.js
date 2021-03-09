@@ -6,7 +6,6 @@ const durations = [15,30,45,60,90];
 const difficulties = ["easy","medium","hard"];
 
 
-
 function getQuestionsFromExternalAPI(category,difficulty) {
   return fetch(
     `https://quizapi.io/api/v1/questions?apiKey=bB5wg05TlOfAPpoDCMJQT7Zd3u1gkp2afISs1nK1&limit=4&category=${category}&multiple_correct_answers=false&difficulty=${difficulty}`,
@@ -22,7 +21,6 @@ function getQuestionsFromExternalAPI(category,difficulty) {
 function parseJSON(array) {
   let Exam = {};
   array.forEach((question) => {
-    console.log(question);
     question.correct_answer = Object.entries(question.correct_answers)
       .filter((ans) => ans[1] == "true")[0][0]
       .substring(0, 8);
@@ -67,7 +65,6 @@ function initExamToApi(teacherID,title,duration) {
   ExamToApi["title"] = title;
   ExamToApi["duration"] = duration;
   ExamToApi["teacherID"]=teacherID;
-  console.log(JSON.stringify(ExamToApi));
   return fetch("http://localhost:3000/exams", {
     method: "post",
     headers: {
@@ -90,7 +87,6 @@ function getRandomExam(teacherID) {
     postBulk(examTemp).then(res=>{
       location.reload();
       hide();
-
       alert("Random exam added successfully!")
     });
   });
@@ -156,5 +152,7 @@ function hide(){
   document.getElementById("spinner-back").classList.remove("show");
   document.getElementById("spinner-front").classList.remove("show");
 }
+
+
 
 

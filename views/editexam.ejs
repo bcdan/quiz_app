@@ -36,15 +36,28 @@
             <div class="card mb-3 question">
                 <div class="card-body">
                     <h5 class="card-title">Question <%=i+1%></h5>
-                    <input type="text" id="question_<%=i%>" name="question_<%=i%>" class="form-control question" value="<%=questions[i].title%>">
+                    <input type="text" id="question_<%=i%>" name="question_<%=i%>" class="form-control question"
+                        value="<%=questions[i].title%>">
                 </div>
                 <ul class="list-group list-group-flush">
                     <% for(let j = 0 ; j< questions[i].choices.length;j++) {%>
-                    <li class="list-group-item"><input type="text" class="form-control choice" value="<%=questions[i].choices[j].text%>"></li>
+                    <li class="list-group-item"><%=j+1%>.<input type="text" class="form-control choice"
+                            value="<%=questions[i].choices[j].text%>"></li>
                     <%}%>
                         </ul>
                         <div class="card-body">
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <div class="dropdown">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                                <span>
+                                   Correct Answer
+                            </span>
+                                <select>
+                                    <% for(let j = 0 ; j< questions[i].choices.length;j++) {%>
+                                     <option value="<%=j%>"><%=j+1%></option>
+                                    <%}%>
+
+                                </select>
+                              </div>
                         </div>
             </div>
 

@@ -1,16 +1,8 @@
 let questionForms = document.querySelectorAll('.editQuestionForm')
 
-//  function updateQuestion(formID){
-//     return async function(event){
-//         event.preventDefault();
-//         console.log(formID);
-//     }
-// }
 questionForms.forEach(form=>{
     form.addEventListener("submit",updateQuestion(form.id));
 });
-
-
 
 
  function updateQuestion(formID){
@@ -19,7 +11,10 @@ questionForms.forEach(form=>{
         let form = document.getElementById(`${formID}`);
         let title = form.querySelector('.form-control.question');
         let choicesArray = form.querySelectorAll('.form-control.choice');
+        let selection = form.querySelector('select');
+        let correctAnswer = selection.options[selection.selectedIndex].text;
         let choices = [...choicesArray].map(choice=>{return {isCorrect:false,text:choice.value}});
+        choices[correctAnswer-1].isCorrect=true;
         console.log(choices);
 
         const question = {choices:choices,title:title.value};

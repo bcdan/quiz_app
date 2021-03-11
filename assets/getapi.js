@@ -44,22 +44,6 @@ function parseJSON(array) {
   return Exam;
 }
 
-function postToMyAPI(question) {
-  fetch("http://localhost:3000/questions", {
-    method: "post",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    body: JSON.stringify(question),
-  })
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      console.log("Created Gist:", data);
-    });
-}
 
 function initExamToApi(teacherID,title,duration) {
   ExamToApi["title"] = title;

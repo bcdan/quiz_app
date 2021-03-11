@@ -11,7 +11,6 @@ exports.getQuestions = async (req,res)=>{
 };
 
 exports.addQuestion =async (req,res)=>{
-        console.log(req.body.choices,req.body.title);
 
         const question = new Question({
             examID:req.body.examID,
@@ -19,8 +18,11 @@ exports.addQuestion =async (req,res)=>{
             title:req.body.title,
             points:req.body.points
         });
+        console.log(question);
+
         try{
             const newQuestion = await question.save();
+            console.log("Blabla", newQuestion);
             const _id = req.body.examID;
             if(_id){
                 const examToUpdate = await Exam.findById({_id});

@@ -62,6 +62,7 @@ exports.updateExam = async (req, res) => {
   try {
     const _id = req.params.id;
     const { title, teacherID, duration, date, questions } = req.body;
+    console.log(title,duration,date);
 
     let exam = await Exam.findOne({ _id });
     if (!exam) {
@@ -79,7 +80,11 @@ exports.updateExam = async (req, res) => {
       if (date != null) exam.date = date;
       if (questions != null) exam.questions = questions;
       await exam.save();
-      res.status(200).json(exam);
+      req.flash(
+        "success_msg",
+        "Exam updated!"
+      );
+      res.status(200).redirect(`/teachers/editexam/${_id}`);
     }
   } catch (err) {
     res.status(500).json({ message: err.message });

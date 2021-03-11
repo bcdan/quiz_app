@@ -13,24 +13,29 @@
                 <div id="alert"></div>
             </div>
         </div>
-        <form id="editExam">
+        <form id="editExam" action="/exams/<%=exam.id%>" method="POST">
+            <input type="hidden" name="_method" value="PUT">
+
             <div class="form-group">
                 <label for="examtitle">Title</label>
-                <input type="text" class="form-control" id="examtitle" aria-describedby="examtitle"
+                <input type="text" name="title" class="form-control" id="examtitle" aria-describedby="examtitle"
                     value="<%=exam.title%>">
             </div>
             <div class="form-group">
                 <label for="duration">Duration</label>
-                <input type="number" class="form-control" min=0 id="duration" value="<%=exam.duration%>">
+                <input type="number" name="duration" class="form-control" min=0 id="duration" value="<%=exam.duration%>">
             </div>
             <div class="form-group">
                 <label for="date">Date</label>
-                <input type="text" class="form-control" id="date" aria-describedby="date" value="<%=exam.date%>">
+                <input type="text" name="date" class="form-control" id="date" aria-describedby="date" value="<%=exam.date%>">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
         <h3 style="margin-top: 2rem;">Questions</h3>
         <hr>
+        <div class="d-grid gap-2">
+            <a class="btn btn-primary" type="button" onclick="addQuestion('<%=exam.id%>')">Add question</a>
+          </div>
         <% for(let i = 0 ; i< questions.length;i++) {%>
         <form id="<%=questions[i].id%>" class="editQuestionForm">
             <div class="card mb-3 question">
@@ -44,19 +49,26 @@
                     <li class="list-group-item"><%=j+1%>.<input type="text" class="form-control choice"
                             value="<%=questions[i].choices[j].text%>"></li>
                     <%}%>
+
                         </ul>
                         <div class="card-body">
                             <div class="dropdown">
                                 <button type="submit" class="btn btn-primary">Save</button>
-                                <span>
-                                   Correct Answer
-                            </span>
-                                <select>
+                                <a class="btn btn-danger float" onclick="deleteQuestion('<%=questions[i]._id%>')">Delete <i class="fas fa-trash-alt"></i></a>
+                                    Correct Answer   
+                                   <% let correctAns =0;%>                            
+                                    <select>
                                     <% for(let j = 0 ; j< questions[i].choices.length;j++) {%>
                                      <option value="<%=j%>"><%=j+1%></option>
+                                     <%if (questions[i].choices[j].isCorrect==true){%>
+                                        <%correctAns = j+1%>
+                                        <%}%>
                                     <%}%>
-
                                 </select>
+                                <span class="badge rounded-pill bg-success">Correct answer <%=correctAns%> </span>
+
+                            </span>
+
                               </div>
                         </div>
             </div>

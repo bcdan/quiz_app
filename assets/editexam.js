@@ -15,8 +15,6 @@ questionForms.forEach(form=>{
         let correctAnswer = selection.options[selection.selectedIndex].text;
         let choices = [...choicesArray].map(choice=>{return {isCorrect:false,text:choice.value}});
         choices[correctAnswer-1].isCorrect=true;
-        console.log(choices);
-
         const question = {choices:choices,title:title.value};
         let resp = await fetch(`http://localhost:3000/questions/${formID}`, {
           method: "PUT",
@@ -36,6 +34,54 @@ questionForms.forEach(form=>{
     }
 
   }
+
+async function deleteQuestion(questionID){
+    let resp = await fetch(`http://localhost:3000/questions/${questionID}`, {
+      method: "DELETE",
+    });
+    if (!resp.ok) {
+      console.log("error fetching");
+    } else {
+        let res = await resp.json();
+        console.log(res);
+        location.reload();
+
+      return res;
+    }
+  }
+
+  async function addQuestion(exam) {
+  const question = {
+    examID:exam,
+    choices:[
+      {text:"a",isCorrect:false},
+      {text:"b",isCorrect:false},
+      {text:"c",isCorrect:false},
+      {text:"d",isCorrect:false}
+      ],
+      title:"new question"
+    };
+  console.log(JSON.stringify(question));
+  let resp = await fetch(`http://localhost:3000/questions/`, {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify(question),
+  });
+  if (!resp.ok) {
+    console.log("error fetching");
+    let res = await resp.json();
+    console.log(res);
+  } else {
+      let res = await resp.json();
+      console.log(res);
+      location.reload();
+    return res;
+  }
+
+}
   
   
   

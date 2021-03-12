@@ -17,6 +17,9 @@ GET http://localhost:3000/exams/getbyteacher/6019745802dd5a2914c2fa6e
 GET http://localhost:3000/questions/
 ###
 
+GET http://localhost:3000/questions/byexam/604213846db0d12dc64849e7
+
+###
 
 POST http://localhost:3000/questions/api/post
 Content-Type: application/json 

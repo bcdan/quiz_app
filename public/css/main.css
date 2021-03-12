@@ -1,3 +1,8 @@
+body  {
+  font-family: Verdana, sans-serif;
+  font-size: 20px;
+}
+
 /*---------Exam CSS--------*/
 .questionBlock{
     margin-top: 20px;
@@ -46,7 +51,6 @@
 
 
 
-
   /*Edit exam page*/
 
   #examtitle,#duration,#date,.form-control.question{
@@ -59,4 +63,47 @@
 
   .card.mb-3.question{
     color:#000;
+  }
+  table{
+    margin-top: 5px;
+  }
+  td,th{
+    text-align:center;
+    background-color: #657e97;
+
+  }
+  .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: orange;
+  }
+
+  .jumbotron{
+    margin-top:2rem;
+  }
+
+
+  /*buttons*/
+
+  .btn-info{
+    border-color:#95a0a0;
+    background-color: #95a0a0;
+  }
+  .btn-danger{
+    border-color:#e84545b0;
+    background-color: #e84545b0;
+  }
+  .btn-primary{
+    border-color:#935ca3;
+    background-color: #935ca3;
+  }
+  .btn-primary:hover{
+    border-color:#b81de0;
+    background-color: #b81de0;
+  }
+  .btn-success{
+    border-color:#5cb85c;
+    background-color: #5cb85c;
+  }
+  .btn-warning{
+    border-color:#dd9128;
+    background-color: #dd9128;
   }

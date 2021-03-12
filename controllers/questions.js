@@ -18,11 +18,9 @@ exports.addQuestion =async (req,res)=>{
             title:req.body.title,
             points:req.body.points
         });
-        console.log(question);
 
         try{
             const newQuestion = await question.save();
-            console.log("Blabla", newQuestion);
             const _id = req.body.examID;
             if(_id){
                 const examToUpdate = await Exam.findById({_id});

@@ -29,6 +29,7 @@ questionForms.forEach(form=>{
         } else {
             let res = await resp.json();
             console.log(res);
+            location.reload();
           return res;
         }
     }

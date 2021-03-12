@@ -24,8 +24,8 @@
             </div>
 
         </div>
-        <table class="table table-dark table-hover table-bordered">
-            <thead>
+        <table class="table table-dark table-hover table-bordered" >
+            <thead >
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Title</th>
@@ -39,7 +39,7 @@
                 <% for(let i = 0 ; i< exams.length;i++) {%>
                 <tr>
                     <th scope="row"><%=i+1%></th>
-                    <td><%=exams[i].title%></td>
+                    <td ><%=exams[i].title%></td>
                     <td><%=exams[i].duration%></td>
                     <td><%=exams[i].date%></td>
                     <td><%=exams[i].questions.length%></td>
@@ -47,10 +47,11 @@
                         <form action="/exams/<%=exams[i].id%>" method="POST" id="delete-form">
                             <input type="hidden" name="_method" value="DELETE">
                             <div class="text-center">
+                                <a class="btn btn-primary" href="/teachers/editexam/<%=exams[i].id%>" role="button">Edit</a>
                                 <button type="submit" class="btn btn-danger">Delete</button>
+
                             </div>
                         </form>
-                        <a class="btn btn-primary" href="/teachers/editexam/<%=exams[i].id%>" role="button">Edit and more</a>
 
                 </tr>
                 <%

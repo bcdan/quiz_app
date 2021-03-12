@@ -178,7 +178,8 @@ exports.postStudentDetails = async (req, res) => {
 };
 
 exports.startQuiz = (req, res) => {
-  res.render("startquiz");
+  //res.render("startquiz");
+  res.render("examTEST",{layout:'exam_layout'});
 };
 
 exports.getByTeacher = (req, res) => {

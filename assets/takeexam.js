@@ -1,24 +1,33 @@
-//let examTitle = document.getElementById("exam_title");
+const examTitle = document.querySelector(".title");
+const examCard = document.getElementById("exam_card");
+const timer = document.querySelector("#timer");
+const start_btn = document.querySelector(".start_btn button");
+const info_box = document.querySelector(".info_box");
+const exit_btn = info_box.querySelector(".buttons .quit");
+const continue_btn = info_box.querySelector(".buttons .restart");
+const quiz_box = document.querySelector(".quiz_box");
+const result_box = document.querySelector(".result_box");
+const option_list = document.querySelector(".option_list");
+const progress_bar = document.querySelector("#progress-bar");
+const rules_duration = document.querySelector('#rules_duration');
 let localExam = allStorage();
 let questions;
-//examTitle.innerText=localExam[0].title;
+examTitle.innerText=localExam[0].title;
 let examID = localExam[0]._id;
-let examCard = document.getElementById("exam_card");
 getQuestionsFromDb();
 let userAnswers;
-
-
+let timerCount = 0;
+let interval ;
+let localDuration = localExam[0].duration*60;
+// let localDuration = 10;
 
 function allStorage() {
-
     let values = [],
         keys = Object.keys(localStorage),
         i = keys.length;
-
     while ( i-- ) {
         values.push( JSON.parse(localStorage.getItem(keys[i])) );
     }
-
     return values;
 }
 
@@ -31,27 +40,49 @@ async function getQuestionsFromDb() {
   }
 
 
-
-//selecting all required elements
-const start_btn = document.querySelector(".start_btn button");
-const info_box = document.querySelector(".info_box");
-const exit_btn = info_box.querySelector(".buttons .quit");
-const continue_btn = info_box.querySelector(".buttons .restart");
-const quiz_box = document.querySelector(".quiz_box");
-const result_box = document.querySelector(".result_box");
-const option_list = document.querySelector(".option_list");
-const time_line = document.querySelector("header .time_line");
-const timeText = document.querySelector(".timer .time_left_txt");
-const timeCount = document.querySelector(".timer .timer_sec");
-
 // if startQuiz button clicked
 start_btn.onclick = ()=>{
     info_box.classList.add("activeInfo"); //show info box
+    rules_duration.innerHTML=`${localExam[0].duration} minutes `;
 }
 
 // if exitQuiz button clicked
 exit_btn.onclick = ()=>{
     info_box.classList.remove("activeInfo"); //hide info box
+}
+
+
+
+//timer logic
+
+function convertSeconds(s){
+    function pad(n) {
+        return (n < 10 ? "0" + n : n);
+      }
+    let min = Math.floor(s/60);
+    let sec = s % 60;
+    return pad(min) + ':' + pad(sec);
+}
+
+function timerSetup(){
+    interval = setInterval(timeIt,1000);
+    timer.innerHTML=(convertSeconds(localDuration-timerCount));
+}
+
+function timeIt(){
+    timerCount++;
+    let prog = timerCount/localDuration * 100;
+    progress_bar.style = `width: ${prog}%`;
+    timer.innerHTML=convertSeconds(localDuration-timerCount);
+    if(timerCount==localDuration){
+        showResult();
+    }
+}
+
+function stopTimer(){
+    clearInterval(interval)
+    timer.innerHTML='DONE';
+    timerCount=0;
 }
 
 // if continueQuiz button clicked
@@ -60,15 +91,12 @@ continue_btn.onclick = ()=>{
     quiz_box.classList.add("activeQuiz"); //show quiz box
     showQuestions(0); //calling showQestions function
     queCounter(1); //passing 1 parameter to queCounter
-    startTimer(15); //calling startTimer function
-    startTimerLine(0); //calling startTimerLine function
+    timerSetup(localDuration);
+
 }
 
-let timeValue =  15;
 let que_count = 0;
 let que_numb = 1;
-let counter;
-let counterLine;
 let widthValue = 0;
 
 const restart_quiz = result_box.querySelector(".buttons .restart");
@@ -76,7 +104,7 @@ const quit_quiz = result_box.querySelector(".buttons .quit");
 
 // if quitQuiz button clicked
 quit_quiz.onclick = ()=>{
-    window.location.reload(); //reload the current window
+    window.location.replace("/"); //reload the current window
 }
 
 const next_btn = document.querySelector("footer .next_btn");
@@ -90,14 +118,7 @@ next_btn.onclick = ()=>{
         que_numb++; //increment the que_numb value
         showQuestions(que_count); //calling showQestions function
         queCounter(que_numb); //passing que_numb value to queCounter
-        clearInterval(counter); //clear counter
-        clearInterval(counterLine); //clear counterLine
-        startTimer(timeValue); //calling startTimer function
-        startTimerLine(widthValue); //calling startTimerLine function
-        timeText.textContent = "Time Left"; //change the timeText to Time Left
     }else{
-        clearInterval(counter); //clear counter
-        clearInterval(counterLine); //clear counterLine
         showResult(); //calling showResult function
     }
 }
@@ -109,26 +130,15 @@ prev_btn.onclick = ()=>{
         que_numb--; //increment the que_numb value
         showQuestions(que_count); //calling showQestions function
         queCounter(que_numb); //passing que_numb value to queCounter
-        clearInterval(counter); //clear counter
-        clearInterval(counterLine); //clear counterLine
-        startTimer(timeValue); //calling startTimer function
-        startTimerLine(widthValue); //calling startTimerLine function
-        timeText.textContent = "Time Left"; //change the timeText to Time Left
-    }else{
-        clearInterval(counter); //clear counter
-        clearInterval(counterLine); //clear counterLine
     }
 }
-
-
-
 
 // getting questions and options from array
 function showQuestions(index){
     const que_text = document.querySelector(".que_text");
     //creating a new span and div tag for question and option and passing the value using array index
     let que_tag = '<span>'+  questions[index].title +'</span>';
-    let option_tag ;
+    let option_tag ="" ;
     for(let j = 0 ;j<questions[index].choices.length;j++){
         option_tag+='<div class="option"><span>'+ questions[index].choices[j].text +'</span></div>';
     }
@@ -143,7 +153,7 @@ function showQuestions(index){
     }
     if(index<questions.length-1){
         next_btn.classList.add("show"); //show the prev button if user selected any option
-        next_btn.innerText="Next Que";
+        next_btn.innerText="Next";
 
     }
         else
@@ -156,25 +166,17 @@ function showQuestions(index){
 
 }
 
-
-
-
-
 // creating the new div tags which for icons
 let tickIconTag = '<div class="icon tick"><i class="fas fa-check"></i></div>';
 let crossIconTag = '<div class="icon cross"><i class="fas fa-times"></i></div>';
 
 //if user clicked on option
 function optionSelected(answer,answerIndex){
-    clearInterval(counter); //clear counter
-    clearInterval(counterLine); //clear counterLine
     if(userAnswers[que_count]!=-1){
         option_list.children[userAnswers[que_count]].classList.remove("picked");
     }
     userAnswers[que_count]=answerIndex;
     answer.classList.add("picked"); //adding green color to correct selected option
-  
-
 }
 
 function showResult(){
@@ -187,7 +189,6 @@ function showResult(){
         }
     }
 
-
     info_box.classList.remove("activeInfo"); //hide info box
     quiz_box.classList.remove("activeQuiz"); //hide quiz box
     result_box.classList.add("activeResult"); //show result box
@@ -195,60 +196,11 @@ function showResult(){
     let grade_div = document.querySelector('.grade');
     let score = 100/questions.length;
     grade_div.innerText = score*userScore;
-    // grade_div.append(grade);
     let scoreTag = '<span><p>'+ userScore +'</p> out of <p>'+ questions.length+' Correct Answers'+'</p></span>';
     scoreText.innerHTML = scoreTag;
-
-    // if (userScore > 3){ // if user scored more than 3
-    //     //creating a new span tag and passing the user score number and total question number
-    //     let scoreTag = '<span>and congrats! 🎉, You got <p>'+ userScore +'</p> out of <p>'+ questions.length +'</p></span>';
-    //     scoreText.innerHTML = scoreTag;  //adding new span tag inside score_Text
-    // }
-    // else if(userScore > 1){ // if user scored more than 1
-    //     let scoreTag = '<span>and nice 😎, You got <p>'+ userScore +'</p> out of <p>'+ questions.length +'</p></span>';
-    //     scoreText.innerHTML = scoreTag;
-    // }
-    // else{ // if user scored less than 1
-    //     let scoreTag = '<span>and sorry 😐, You got only <p>'+ userScore +'</p> out of <p>'+ questions.length +'</p></span>';
-    //     scoreText.innerHTML = scoreTag;
-    // }
+    stopTimer();
 }
 
-function startTimer(time){
-    counter = setInterval(timer, 1000);
-    function timer(){
-        timeCount.textContent = time; //changing the value of timeCount with time value
-        time--; //decrement the time value
-        if(time < 9){ //if timer is less than 9
-            let addZero = timeCount.textContent; 
-            timeCount.textContent = "0" + addZero; //add a 0 before time value
-        }
-        if(time < 0){ //if timer is less than 0
-            clearInterval(counter); //clear counter
-            timeText.textContent = "Time Off"; //change the time text to time off
-            const allOptions = option_list.children.length; //getting all option items
-            let correctAns = questions[que_count].answer; //getting correct answer from array
-            for(i=0; i < allOptions; i++){
-                if(option_list.children[i].textContent == correctAns){ //if there is an option which is matched to an array answer
-                    option_list.children[i].setAttribute("class", "option correct"); //adding green color to matched option
-                    option_list.children[i].insertAdjacentHTML("beforeend", tickIconTag); //adding tick icon to matched option
-                    console.log("Time Off: Auto selected correct answer.");
-                }
-            }
-        }
-    }
-}
-
-function startTimerLine(time){
-    counterLine = setInterval(timer, 29);
-    function timer(){
-        time += 1; //upgrading time value with 1
-        time_line.style.width = time + "px"; //increasing width of time_line with px by time value
-        if(time > 549){ //if time value is greater than 549
-            clearInterval(counterLine); //clear counterLine
-        }
-    }
-}
 
 function queCounter(index){
     //creating a new span tag and passing the question number and total question

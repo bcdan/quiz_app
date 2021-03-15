@@ -11,6 +11,13 @@ router.get('/',ExamsController.getExams);
 //Get exams by teacher's ID
 router.get('/getbyteacher/:id',getExamsByTeacher,ExamsController.getByTeacher);
 
+//post student details 
+router.post('/postdetails',ExamsController.postStudentDetails);
+
+router.get('/studentform',ExamsController.getStudentExamForm);
+
+router.get('/startquiz',ExamsController.startQuiz);
+
 //GET one exam
 router.get('/:id',ExamsController.getOneExam);
 
@@ -23,12 +30,7 @@ router.put('/:id',ExamsController.updateExam);
 //delete an exam
 router.delete('/:id',ExamsController.deleteExam);
 
-//post student details 
-router.post('/start/postdetails',ExamsController.postStudentDetails);
 
-router.get('/start/studentform',ExamsController.getStudentExamForm);
-
-router.get('/start/startquiz',ExamsController.startQuiz);
 
 
 module.exports = router;

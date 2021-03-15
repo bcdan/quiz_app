@@ -115,7 +115,7 @@ exports.deleteExam = async (req, res) => {
 };
 
 exports.getStudentExamForm = async (req, res) => {
-  res.render("exam");
+  res.render("studentForm");
 };
 
 exports.postStudentDetails = async (req, res) => {
@@ -178,8 +178,7 @@ exports.postStudentDetails = async (req, res) => {
 };
 
 exports.startQuiz = (req, res) => {
-  //res.render("startquiz");
-  res.render("examTEST",{layout:'exam_layout'});
+  res.render("exam",{layout:'./layouts/exam_layout'});
 };
 
 exports.getByTeacher = (req, res) => {

@@ -1,0 +1,42 @@
+<script src="/exam.js" async></script>
+
+<div class="row mt-5">
+    <div class="col-md-6 m-auto">
+      <div class="card card-body" id="exam_body">
+        <h1 class="text-center mb-3">
+		   Enter your details
+        </h1>
+        <div id="alertZone"></div>
+        <form id="examform">
+          <div class="form-group">
+            <label for="studentid">ID number</label>
+            <input
+              required
+              type="number"
+              id="studentid"
+              name="studentid"
+              class="form-control"
+              placeholder="Enter your id"
+              value="<%= typeof studentid != 'undefined' ? studentid : '' %>"
+            />
+          </div>
+          <div class="form-group">
+            <label for="examid">Exam ID</label>
+            <input
+              type="examid"
+              id="examid"
+              name="examid"
+              class="form-control"
+              placeholder="Enter exam id"
+              value="<%= typeof examid != 'undefined' ? examid : '' %>"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">
+            Take test
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+

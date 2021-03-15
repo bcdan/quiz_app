@@ -35,11 +35,12 @@ body{
     z-index: 5;
     pointer-events: auto;
     transform: translate(-50%, -50%) scale(1);
+    color: black;
 }
 
 .start_btn button{
-    font-size: 25px;
-    font-weight: 500;
+    font-size: 60px;
+    font-weight: 600;
     color: #007bff;
     padding: 15px 30px;
     outline: none;
@@ -47,16 +48,18 @@ body{
     border-radius: 5px;
     background: #fff;
     cursor: pointer;
+    text-shadow: 1px 2px black;
+    box-shadow: 6px 6px #00000040;
 }
 
 .info_box{
-    width: 540px;
     background: #fff;
     border-radius: 5px;
     transform: translate(-50%, -50%) scale(0.9);
     opacity: 0;
     pointer-events: none;
     transition: all 0.3s ease;
+    color: black;
 }
 
 .info_box .info-title{
@@ -69,6 +72,7 @@ body{
     border-radius: 5px 5px 0 0;
     font-size: 20px;
     font-weight: 600;
+
 }
 
 .info_box .info-list{
@@ -105,6 +109,7 @@ body{
     border-radius: 5px;
     border: 1px solid #007bff;
     transition: all 0.3s ease;
+
 }
 
 .quiz_box{
@@ -115,65 +120,20 @@ body{
     opacity: 0;
     pointer-events: none;
     transition: all 0.3s ease;
+    color: black;
 }
 
-.quiz_box header{
-    position: relative;
-    z-index: 2;
-    height: 70px;
+.quiz_box hr{
+    border-width: 1px;
+    border-color: black;
+}
+
+.title{
+    float: center;
     padding: 0 30px;
-    background: #fff;
     border-radius: 5px 5px 0 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0px 3px 5px 1px rgba(0,0,0,0.1);
-}
-
-.quiz_box header .title{
-    font-size: 20px;
+    font-size: 30px;
     font-weight: 600;
-}
-
-.quiz_box header .timer{
-    color: #004085;
-    background: #cce5ff;
-    border: 1px solid #b8daff;
-    height: 45px;
-    padding: 0 8px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 145px;
-}
-
-.quiz_box header .timer .time_left_txt{
-    font-weight: 400;
-    font-size: 17px;
-    user-select: none;
-}
-
-.quiz_box header .timer .timer_sec{
-    font-size: 18px;
-    font-weight: 500;
-    height: 30px;
-    width: 45px;
-    color: #fff;
-    border-radius: 5px;
-    line-height: 30px;
-    text-align: center;
-    background: #343a40;
-    border: 1px solid #343a40;
-    user-select: none;
-}
-
-.quiz_box header .time_line{
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-    height: 3px;
-    background: #007bff;
 }
 
 section{
@@ -380,4 +340,22 @@ footer button.show{
 .buttons button.quit:hover{
     color: #fff;
     background: #007bff;
+}
+
+.card-header {
+    text-align: center;
+    padding-top: 30px;
+}
+
+#timer {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 800;
+    text-shadow: 4px 4px black;
+}
+
+.progress {
+    background-color: #eee;
+    border: 2px solid black;
+    height: 30px;
 }

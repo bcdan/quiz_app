@@ -1,42 +1,72 @@
-<script src="/exam.js" async></script>
+<!-- Timer goes here -->
+<div class="card-header"><p id="timer">Timer</p></div>
+<div class="progress">
+  <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" id="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+ 
+ <!-- start Quiz button -->
+ <div class="start_btn"><button>Start Exam</button></div>
 
-<div class="row mt-5">
-    <div class="col-md-6 m-auto">
-      <div class="card card-body" id="exam_body">
-        <h1 class="text-center mb-3">
-		   Enter your details
-        </h1>
-        <div id="alertZone"></div>
-        <form id="examform">
-          <div class="form-group">
-            <label for="studentid">ID number</label>
-            <input
-              required
-              type="number"
-              id="studentid"
-              name="studentid"
-              class="form-control"
-              placeholder="Enter your id"
-              value="<%= typeof studentid != 'undefined' ? studentid : '' %>"
-            />
-          </div>
-          <div class="form-group">
-            <label for="examid">Exam ID</label>
-            <input
-              type="examid"
-              id="examid"
-              name="examid"
-              class="form-control"
-              placeholder="Enter exam id"
-              value="<%= typeof examid != 'undefined' ? examid : '' %>"
-            />
-          </div>
-          <button type="submit" class="btn btn-primary btn-block">
-            Take test
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
-  
+ <!-- Info Box -->
+ <div class="info_box">
+     <div class="info-title"><span>Some Rules of this exam</span></div>
+     <div class="info-list">
+         <div class="info">1. You will have <span id="rules_duration"></span> for the entire exam.</div>
+         <div class="info">2. You can always click "Previous" to go back to the previous question.</div>
+         <div class="info">3. You can only select one option per question.</div>
+         <div class="info">4. You can't exit the exam while taking it.</div>
+         <div class="info">5. You'll get points based of your correct answers.</div>
+         <div class="info">6. Once the time is over - you'll be transfered to the results screen.</div>
+     </div>
+     <div class="buttons">
+         <a type="button" class="quit" href="/">Exit exam</a>
+         <button class="restart">Continue</button>
+     </div>
+ </div>
+
+ <!-- Quiz Box -->
+ <div class="quiz_box">
+         <h1 class="text-center title mt-3"></h1>
+         <hr>
+     <section>
+         <div class="que_text">
+             <!-- Here I've inserted question from JavaScript -->
+         </div>
+         <div class="option_list">
+             <!-- Here I've inserted options from JavaScript -->
+         </div>
+     </section>
+
+     <!-- footer of Quiz Box -->
+     <footer>
+         <div class="total_que">
+             <!-- Here I've inserted Question Count Number from JavaScript -->
+         </div>
+         <button class="prev_btn">Previous</button>
+         <button class="next_btn">Next</button>
+
+     </footer>
+ </div>
+
+ <!-- Result Box -->
+ <div class="result_box">
+     <div class="icon">
+         <i class="fas fa-check"></i>
+     </div>
+     <h1 class="grade"></h1>
+     <div class="complete_text">You've completed the exam!</div>
+     <div class="score_text">
+         <!-- Here I've inserted Score Result from JavaScript -->
+     </div>
+     <div class="buttons">
+         <button type="btn btn-info" class="quit">Exit</button>
+     </div>
+ </div>
+
+   <!-- Inside this JavaScript file I've inserted Questions and Options only -->
+   <script src="/questions.js"></script>
+
+   <!-- Inside this JavaScript file I've coded all Quiz Codes -->
+   <script src="/takeexam.js"></script>
+
 

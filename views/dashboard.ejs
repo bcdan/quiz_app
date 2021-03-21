@@ -1,9 +1,9 @@
-<h1 class="mt-4 text-center">Dashboard</h1>
+<h1 class="dash-head mt-4 text-center">Dashboard</h1>
 <div class="row mt-5">
   <div class="col-md-6 m-auto">
-    <div class="card card-body" id="dashboard_card">
-      <p class="lead mb-3">Welcome <%=user.firstName %> <%=user.lastName%></p>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="hover_card card card-body" id="dashboard_card">
+      <p class="welcome-head lead mb-3">Welcome <%=user.firstName %> <%=user.lastName%></p>
+      <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
           <div class="collapse navbar-collapse">
             <ul class="navbar-nav">
@@ -20,7 +20,7 @@
           </div>
         </div>
       </nav>
-      <a href="/teachers/logout" class="btn btn-secondary">Logout</a>
+      <a href="/teachers/logout" class="btn btn-primary">Logout</a>
     </div>
   </div>
 </div>

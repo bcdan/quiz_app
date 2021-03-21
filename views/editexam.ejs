@@ -1,80 +1,82 @@
 <script src="/editexam.js" async></script>
 <div class="container">
-    <div class="jumbotron">
-        <%- include ('./partials/messages') %>
-        <div class="text-center">
-            <h1><i class="fas fa-list-ol"></i> Edit exam</h1>
-        </div>
-        <div class="row">
-            <div class="col-md-12 text-right">
-                <a class="btn btn-info float" href="/teachers/myexams/<%=user.id%>" role="button"><i
-                        class="fas fa-arrow-circle-left"></i>
-                    BACK</a>
-                <div id="alert"></div>
-            </div>
-        </div>
-        <form id="editExam" action="/exams/<%=exam.id%>" method="POST">
-            <input type="hidden" name="_method" value="PUT">
+    <%- include ('./partials/messages') %>
+    <h1 class="dash-head mt-4 text-center"><i class="far fa-edit"></i> Edit exam</h1>
 
-            <div class="form-group">
-                <label for="examtitle">Title</label>
-                <input type="text" name="title" class="form-control" id="examtitle" aria-describedby="examtitle"
-                    value="<%=exam.title%>">
-            </div>
-            <div class="form-group">
-                <label for="duration">Duration</label>
-                <input type="number" name="duration" class="form-control" min=0 id="duration" value="<%=exam.duration%>">
-            </div>
-            <div class="form-group">
-                <label for="date">Date</label>
-                <input type="text" name="date" class="form-control" id="date" aria-describedby="date" value="<%=exam.date%>">
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-        <h3 style="margin-top: 2rem;">Questions</h3>
-        <hr>
-        <div class="d-grid gap-2">
-            <a class="btn btn-primary" type="button" onclick="addQuestion('<%=exam.id%>')">Add question</a>
-          </div>
-        <% for(let i = 0 ; i< questions.length;i++) {%>
-        <form id="<%=questions[i].id%>" class="editQuestionForm">
-            <div class="card mb-3 question">
-                <div class="card-body">
-                    <h5 class="card-title">Question <%=i+1%></h5>
-                    <input type="text" id="question_<%=i%>" name="question_<%=i%>" class="form-control question"
-                        value="<%=questions[i].title%>">
+    <div id="alert"></div>
+    <div class="card">
+        <div class="card-title">
+            <a class="btn btn-primary float" href="/teachers/myexams/<%=user.id%>" role="button"><i
+                    class="fas fa-arrow-circle-left"></i>
+                BACK</a>
+        </div>
+        <div class="card-body">
+            <form id="editExam" action="/exams/<%=exam.id%>" method="POST">
+                <input type="hidden" name="_method" value="PUT">
+                <div class="form-group">
+                    <label for="examtitle">Title</label>
+                    <input type="text" name="title" class="form-control" id="examtitle" aria-describedby="examtitle"
+                        value="<%=exam.title%>">
                 </div>
-                <ul class="list-group list-group-flush">
-                    <% for(let j = 0 ; j< questions[i].choices.length;j++) {%>
-                    <li class="list-group-item"><%=j+1%>.<input type="text" class="form-control choice"
-                            value="<%=questions[i].choices[j].text%>"></li>
-                    <%}%>
+                <div class="form-group">
+                    <label for="duration">Duration</label>
+                    <input type="number" name="duration" class="form-control" min=0 id="duration"
+                        value="<%=exam.duration%>">
+                </div>
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="text" name="date" class="form-control" id="date" aria-describedby="date"
+                        value="<%=exam.date%>">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+    <h1 class="dash-head mt-4 text-center"><i class="far fa-question-circle"></i> Questions</h1>
+    <hr>
+    <div class="add_button_float">
+        <a type="button" onclick="addQuestion('<%=exam.id%>')" class="btn btn-warning"><i class="fas fa-plus"></i></a>
+    </div>
+
+    <% for(let i = 0 ; i< questions.length;i++) {%>
+    <form id="<%=questions[i].id%>" class="editQuestionForm">
+        <div class="card mb-3 question">
+            <div class="card-body">
+                <h5 class="card-title">Question <%=i+1%></h5>
+                <input type="text" id="question_<%=i%>" name="question_<%=i%>" class="form-control question"
+                    value="<%=questions[i].title%>">
+            </div>
+            <ul class="list-group list-group-flush">
+                <% for(let j = 0 ; j< questions[i].choices.length;j++) {%>
+                <li class="list-group-item"><%=j+1%>.<input type="text" class="form-control choice"
+                        value="<%=questions[i].choices[j].text%>"></li>
+                <%}%>
 
                         </ul>
                         <div class="card-body">
                             <div class="dropdown">
                                 <button type="submit" class="btn btn-primary">Save</button>
-                                <a class="btn btn-danger float" onclick="deleteQuestion('<%=questions[i]._id%>')">Delete <i class="fas fa-trash-alt"></i></a>
-                                    Correct Answer   
-                                   <% let correctAns =0;%>                            
-                                    <select>
-                                    <% for(let j = 0 ; j< questions[i].choices.length;j++) {%>
-                                     <option value="<%=j%>"><%=j+1%></option>
-                                     <%if (questions[i].choices[j].isCorrect==true){%>
-                                        <%correctAns = j+1%>
-                                        <%}%>
+                                <a class="btn btn-danger float" onclick="deleteQuestion('<%=questions[i]._id%>')">Delete
+                <i class="fas fa-trash-alt"></i></a>
+                Correct Answer
+                <% let correctAns =0;%>
+                <select>
+                    <% for(let j = 0 ; j< questions[i].choices.length;j++) {%>
+                    <option value="<%=j%>"><%=j+1%></option>
+                    <%if (questions[i].choices[j].isCorrect==true){%>
+                    <%correctAns = j+1%>
+                    <%}%>
                                     <%}%>
-                                </select>
-                                <span class="badge rounded-pill bg-success">Correct answer <%=correctAns%> </span>
+                </select>
+                <span class="badge rounded-pill bg-success">Correct answer <%=correctAns%> </span>
 
-                            </span>
+                </span>
 
-                              </div>
-                        </div>
-            </div>
+        </div>
+</div>
+</div>
 
-        </form>
-        <%}%>
+</form>
+<%}%>
                     <hr>
             </div>
-    </div>

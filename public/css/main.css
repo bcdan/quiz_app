@@ -11,14 +11,24 @@ body  {
   font-size: 20px;
   background-color: #007bff;
 }
-
-
 .card{
   border-radius: 8px;
-  align-items: center;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
   0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 }
+
+.hover_card{
+  align-items: center;
+  transition-duration: 0.3s;
+  transition-property: transform;
+}
+
+.hover_card:hover{
+  transform: scale(1.1);
+}
+
+
 .row{
   margin-top:10%;
 }
@@ -32,51 +42,113 @@ body  {
     padding-left:3rem;
 }
 
+
+/* exams list */
+.exams_title_card{
+  margin-top: 30px;
+  padding-right: 20px;
+  padding-left:20px;
+}
+.exams_title_card btn-primary{
+  float:left;
+}
+.exams_title_card button.btn-success,.exams_title_card a.btn-warning{
+  float:right;
+  margin-right: 5px;
+}
+
 .main_btn{
   border-radius: 8px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
   0 6px 20px 0 rgba(0, 0, 0, 0.19);
   font-size: 18px;
-
 }
+
+.exams_container{
+  margin-top:25px;
+}
+
 
 
 /*Dashboard*/
 .container-fluid{
     font-size: 1.25rem;
 }
+.navbar{
+  margin-bottom: 50px;
+}
 
+.bg-light{
+  background-color: #fff;
+}
+
+.nav-item{
+  font-size: 25px;
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+
+.nav-item:hover{
+  font-size: 25px;
+  -webkit-transform: translateY(-8px);
+  transform: translateY(-8px);
+}
+
+.nav-item a{
+  color: black;
+}
+
+.nav-item a:hover{
+  color: #007bff;
+}
+
+.dash-head{
+  color: #fff;
+  text-align: center;
+  font-size: 60px;
+  font-weight: 800;
+  text-shadow: 4px 4px black;
+}
+
+.welcome-head {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 800;
+}
 
 /* [FULL SCREEN SPINNER] */
-#spinner-back, #spinner-front {
+
+#spinner-front {
+  visibility: hidden;
+  border: 16px dotted #000000AD;
+  border-radius: 50%;
+  border-top: 16px dotted #3498db;
+  width: 120px;
+  background-color: transparent;
+  height: 120px;
     position: fixed;
-    width: 100vw;
-    transition: all 1s;
-    visibility: hidden;
-    opacity: 0;
-  }
-  #spinner-back {
-    z-index: 998;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0);
-  }
-  #spinner-front {
-    z-index: 999;
-    color: #fff;
-    text-align: center;
-    margin-top: 50vh;
-    transform: translateY(-50%);
-  }
-  #spinner-back.show, #spinner-front.show {
-    visibility: visible;
-    opacity: 1;
-  }
-  
-  /* [DOES NOT QUITE MATTER] */
-  html, body {
-    margin: 0;
-    padding: 0;
-  }
+    bottom: 60%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 99999999;
+  -webkit-animation: spin 1.5s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+#spinner-front.show {
+  visibility: visible;
+} 
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 
 
 
@@ -98,15 +170,75 @@ body  {
   }
   td,th{
     text-align:center;
-    background-color: #657e97;
-
+    background-color: #4e6377;
+  }
+  th{
+    text-shadow: 2px 2px black;
   }
   .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-    background-color: orange;
+    background-color: rgb(46, 45, 45);
   }
+/* Floating add button -- begin*/
+  .add_button_float a{
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+
+    font-size:55px;
+    position: fixed; bottom: 0px; right: 0px;
+    border-radius: 50px;
+    border:solid green;
+    margin-right: 20%;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 2%;
+    background-color: green;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5), 
+    0 0.5px 10px 0 rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px black;
+
+  }
+  .add_button_float a:hover{
+    -webkit-animation-name: hvr-push;
+    animation-name: hvr-push;
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    background-color: rgb(2, 141, 2);
+    border-color: rgb(2, 141, 2);
+  }
+
+  @-webkit-keyframes hvr-push {
+    50% {
+      -webkit-transform: scale(0.8);
+      transform: scale(0.8);
+    }
+    100% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+  }
+  @keyframes hvr-push {
+    50% {
+      -webkit-transform: scale(0.8);
+      transform: scale(0.8);
+    }
+    100% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+  }
+
+  /* floating button add -- END */
 
   .jumbotron{
     margin-top:2rem;
+    background-color: #fff ;
   }
   .jumbotron h1{
     font-size:125px;
@@ -117,7 +249,16 @@ body  {
   }
 
 
+
+
   /*buttons*/
+
+.btn{
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
+  0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  font-size: 18px;
+}
 
   .btn-info{
     border-color:#95a0a0;
@@ -128,18 +269,24 @@ body  {
     background-color: #e84545b0;
   }
   .btn-primary{
-    border-color:#935ca3;
-    background-color: #935ca3;
+    border-color:#007bff;
+    background-color: #007bff;
+    
   }
   .btn-primary:hover{
-    border-color:#b81de0;
-    background-color: #b81de0;
-  }
-  .btn-success{
-    border-color:#5cb85c;
-    background-color: #5cb85c;
+    border-color:#3295ff;
+    background-color: #3295ff;
   }
   .btn-warning{
-    border-color:#dd9128;
-    background-color: #dd9128;
+    border-color:#eb8901;
+    background-color: #eb8901;
   }
+.btn-success:hover{
+  border-color:#50c729;
+  background-color: #50c729;
+}
+.btn-warning:hover{
+  border-color:#fb9a12;
+  background-color: #fb9a12;
+}
+

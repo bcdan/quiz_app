@@ -5,8 +5,8 @@
 <div class="container">
   <div class="row ">
     <%if(user){%>
-    <div class="col-lg-12 ">
-      <div class="card ">
+    <div class="col-sm-12">
+      <div class="hover_card card">
         <div class="card-body">
           <h1 class="text-center mb-3"> Hello <%=user.firstName%> <%=user.lastName%> </h1>
           <div class="text-center">
@@ -19,7 +19,7 @@
     </div>
     <%}else{%>
     <div class="col-lg-6  ">
-      <div class="card ">
+      <div class="hover_card card ">
         <div class="card-body text-center">
           <h1 class="text-center mb-3"> Teachers Login</h1>
           <a href="/teachers/login" type="button" class="btn btn-primary btn-block main_btn">Login as teacher</a>
@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="col-lg-6  ">
-      <div class="card ">
+      <div class="hover_card card ">
         <div class="card-body text-center ">
           <h1 class=" mb-3"> Take an exam </h1>
           <a href="/exams/studentform" type="button" class="btn btn-primary btn-block main_btn">Continue as student</a>

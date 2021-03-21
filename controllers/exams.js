@@ -169,7 +169,7 @@ exports.postStudentDetails = async (req, res) => {
               })
               .catch((err) => console.log(err));
           } else {
-            res.json({ msg: "Exam not found" });
+            res.status(404).json({ msg: "Exam not found" });
           }
         }
       }

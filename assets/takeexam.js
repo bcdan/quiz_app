@@ -193,6 +193,8 @@ function showResult(){
     let scoreTag = '<span><p>'+ userScore +'</p> out of <p>'+ questions.length+' Correct Answers'+'</p></span>';
     scoreText.innerHTML = scoreTag;
     stopTimer();
+    localStorage.clear();
+
 }
 
 

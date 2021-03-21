@@ -6,6 +6,7 @@ form.addEventListener('submit',async function postToApi(event){
     
     const studentID =  document.querySelector('#studentid').value;
     const examID = document.querySelector('#examid').value
+    console.log("herasdasdasde")
     let data = {studentid:studentID , examid:examID};
     let target = '/exams/postdetails';
     console.log("trying to fetch");
@@ -20,15 +21,17 @@ form.addEventListener('submit',async function postToApi(event){
         
        }).then(response=>{
             if(!response.ok){
-                response.json().then(data=>console.log(myAlert(data.msg)));            
+                response.json().then(data=>myAlert(data.msg));            
                 console.log("Error fetching");
+                localStorage.clear();
                 return;
+            }else{
+                response.json().then(data=>{
+                    localStorage.setItem(data._id,JSON.stringify(data));
+                    window.location.replace('/exams/startquiz');
+                });
             }
-            response.json().then(data=>{
-                console.log(data);
-                localStorage.setItem(data._id,JSON.stringify(data));
-                window.location.replace('/exams/startquiz');
-            });
+
        }).catch(err=>console.log(err));
 
        

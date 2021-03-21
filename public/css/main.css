@@ -70,6 +70,8 @@ body  {
 
 
 
+
+
 /*Dashboard*/
 .container-fluid{
     font-size: 1.25rem;
@@ -178,6 +180,27 @@ body  {
   .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
     background-color: rgb(46, 45, 45);
   }
+
+  .editexam_card .card-title{
+    padding-top: 10px ;
+    padding-left: 20px;
+  }
+  .editexam_card{
+    margin-top: 35px;
+  }
+
+  .editQuestionForm{
+    margin-top:40px;
+  }
+
+  .form-control.choice{
+    width: 90%;
+    display:inline;
+    border:0;
+  }
+  #chioce_num{
+    margin-left:5px ;
+  }
 /* Floating add button -- begin*/
   .add_button_float a{
     display: inline-block;
@@ -251,6 +274,37 @@ body  {
 
 
 
+.custom-form{
+  background-color: rgb(255, 255, 255);
+  color: #000;
+}
+.custom-form:after{
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+.custom-form-selected {
+  color: #ffffff;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+}
+.custom-form-items{
+    position: absolute;
+    background-color: DodgerBlue;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+}
+
+
   /*buttons*/
 
 .btn{
@@ -260,18 +314,23 @@ body  {
   font-size: 18px;
 }
 
+#duration{
+  background-color: white;
+}
+
   .btn-info{
     border-color:#95a0a0;
     background-color: #95a0a0;
   }
-  .btn-danger{
-    border-color:#e84545b0;
-    background-color: #e84545b0;
-  }
+
   .btn-primary{
     border-color:#007bff;
     background-color: #007bff;
     
+  }
+  .btn-danger:hover{
+    border-color:#ff0037d2;
+    background-color: #ff0037d2;
   }
   .btn-primary:hover{
     border-color:#3295ff;
@@ -290,3 +349,19 @@ body  {
   background-color: #fb9a12;
 }
 
+
+.login-container{
+  margin: 0 auto;
+  margin-top: 15%;
+  width: 20%;
+}
+.student-container{
+  margin: 0 auto;
+  margin-top: 15%;
+  width: 30%;
+}
+.main-container{
+  margin: 0 auto;
+  margin-top: 10%;
+  width: 35%;
+}

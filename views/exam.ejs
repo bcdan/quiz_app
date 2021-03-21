@@ -1,3 +1,4 @@
+
 <!-- Timer goes here -->
 <div class="card-header"><p id="timer">Timer</p></div>
 <div class="progress">
@@ -5,7 +6,9 @@
 </div>
  
  <!-- start Quiz button -->
- <div class="start_btn"><button>Start Exam</button></div>
+ <div class="start_btn">
+     <button>Start Exam</button>
+</div>
 
  <!-- Info Box -->
  <div class="info_box">
@@ -19,7 +22,7 @@
          <div class="info">6. Once the time is over - you'll be transfered to the results screen.</div>
      </div>
      <div class="buttons">
-         <a type="button" class="quit" href="/">Exit exam</a>
+         <a type="button" class="btn btn-danger " href="/">Exit</a>
          <button class="restart">Continue</button>
      </div>
  </div>
@@ -63,10 +66,8 @@
      </div>
  </div>
 
-   <!-- Inside this JavaScript file I've inserted Questions and Options only -->
-   <script src="/questions.js"></script>
 
    <!-- Inside this JavaScript file I've coded all Quiz Codes -->
-   <script src="/takeexam.js"></script>
+   <script src="/takeexam.js" async></script>
 
 

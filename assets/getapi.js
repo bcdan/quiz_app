@@ -1,6 +1,7 @@
 
 var ExamToApi = {};
 
+
 const categories = ["Linux","Code","SQL","DevOps","Docker"];
 const durations = [15,30,45,60,90];
 const difficulties = ["easy","medium","hard"];

@@ -1,17 +1,19 @@
 <script src="/editexam.js" async></script>
+<div id="spinner-front">
+</div>
 <div class="container">
     <%- include ('./partials/messages') %>
     <h1 class="dash-head mt-4 text-center"><i class="far fa-edit"></i> Edit exam</h1>
 
     <div id="alert"></div>
-    <div class="card">
+    <div class="card editexam_card">
         <div class="card-title">
             <a class="btn btn-primary float" href="/teachers/myexams/<%=user.id%>" role="button"><i
                     class="fas fa-arrow-circle-left"></i>
-                BACK</a>
+                Back</a>
         </div>
         <div class="card-body">
-            <form id="editExam" action="/exams/<%=exam.id%>" method="POST">
+            <form id="editExam" action="/exams/<%=exam.id%>" onsubmit="show()" method="POST">
                 <input type="hidden" name="_method" value="PUT">
                 <div class="form-group">
                     <label for="examtitle">Title</label>
@@ -28,12 +30,11 @@
                     <input type="text" name="date" class="form-control" id="date" aria-describedby="date"
                         value="<%=exam.date%>">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-success">Submit</button>
             </form>
         </div>
     </div>
     <h1 class="dash-head mt-4 text-center"><i class="far fa-question-circle"></i> Questions</h1>
-    <hr>
     <div class="add_button_float">
         <a type="button" onclick="addQuestion('<%=exam.id%>')" class="btn btn-warning"><i class="fas fa-plus"></i></a>
     </div>
@@ -48,31 +49,33 @@
             </div>
             <ul class="list-group list-group-flush">
                 <% for(let j = 0 ; j< questions[i].choices.length;j++) {%>
-                <li class="list-group-item"><%=j+1%>.<input type="text" class="form-control choice"
+                <li class="list-group-item"> <%=j+1%> . <input type="text" class="form-control choice"
                         value="<%=questions[i].choices[j].text%>"></li>
                 <%}%>
 
-                        </ul>
-                        <div class="card-body">
-                            <div class="dropdown">
-                                <button type="submit" class="btn btn-primary">Save</button>
-                                <a class="btn btn-danger float" onclick="deleteQuestion('<%=questions[i]._id%>')">Delete
-                <i class="fas fa-trash-alt"></i></a>
-                Correct Answer
-                <% let correctAns =0;%>
-                <select>
+            </ul>
+            <div class="card-footer">
+                <div class="dropdown" >
+                    <button type="submit" class="btn btn-success"><i class="far fa-save"></i> Save</button>
+                    <button class="btn btn-secondary dropdown-toggle"  type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="far fa-check-square"></i> Correct answer
+                    </button>
+                    <% let correctAns =0;%>
+                <div class="dropdown-menu" id="drop_<%=questions[i].id%>" aria-labelledby="dropdownMenu2">
                     <% for(let j = 0 ; j< questions[i].choices.length;j++) {%>
-                    <option value="<%=j%>"><%=j+1%></option>
                     <%if (questions[i].choices[j].isCorrect==true){%>
-                    <%correctAns = j+1%>
-                    <%}%>
-                                    <%}%>
-                </select>
-                <span class="badge rounded-pill bg-success">Correct answer <%=correctAns%> </span>
+                    <option class="dropdown-item active" type="button"><%=j+1%></option>
+                    <%}else{%>
+                    <option class="dropdown-item" type="button"><%=j+1%></option>
+                    <%}%>     
+                     <%}%>
+                </div>
+                <a class="btn btn-danger float-right" onclick="deleteQuestion('<%=questions[i]._id%>')" onclick="show()">Delete
+                    <i class="fas fa-trash-alt"></i></a>
+            </div>
 
-                </span>
 
-        </div>
+
 </div>
 </div>
 

@@ -3,7 +3,6 @@ const examCard = document.getElementById("exam_card");
 const timer = document.querySelector("#timer");
 const start_btn = document.querySelector(".start_btn button");
 const info_box = document.querySelector(".info_box");
-const exit_btn = info_box.querySelector(".buttons .quit");
 const continue_btn = info_box.querySelector(".buttons .restart");
 const quiz_box = document.querySelector(".quiz_box");
 const result_box = document.querySelector(".result_box");
@@ -44,11 +43,6 @@ async function getQuestionsFromDb() {
 start_btn.onclick = ()=>{
     info_box.classList.add("activeInfo"); //show info box
     rules_duration.innerHTML=`${localExam[0].duration} minutes `;
-}
-
-// if exitQuiz button clicked
-exit_btn.onclick = ()=>{
-    info_box.classList.remove("activeInfo"); //hide info box
 }
 
 

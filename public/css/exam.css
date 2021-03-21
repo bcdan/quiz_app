@@ -117,7 +117,7 @@ body{
     background: #fff;
     border-radius: 5px;
     transform: translate(-50%, -50%) scale(0.9);
-    /* opacity: 0; */
+    opacity: 0;
     pointer-events: none;
     transition: all 0.3s ease;
     color: black;
@@ -322,6 +322,20 @@ footer button.show{
     border: 1px solid #007bff;
     transition: all 0.3s ease;
 }
+.btn-danger{
+    margin: 0 5px;
+    height: 40px;
+    width: 100px;
+    font-size: 17px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    
+}
+
 
 .buttons button.restart{
     color: #fff;
@@ -359,3 +373,5 @@ footer button.show{
     border: 2px solid black;
     height: 30px;
 }
+
+  

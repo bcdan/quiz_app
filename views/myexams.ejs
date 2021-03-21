@@ -1,4 +1,4 @@
-<script src="/getapi.js" async></script>
+<script src="/getapi.js" async  ></script>
 <div id="spinner-front">
 </div>
 <h1 class="dash-head mt-4 text-center"><i class="fas fa-list-ol"></i> Exams list</h1>
@@ -38,7 +38,7 @@
                         <td><%=exams[i].date%></td>
                         <td><%=exams[i].questions.length%></td>
                         <td>
-                            <form action="/exams/<%=exams[i].id%>" method="POST" id="delete-form">
+                            <form action="/exams/<%=exams[i].id%>" onsubmit="show()" method="POST" id="delete-form">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <div class="text-center">
                                     <a class="btn btn-primary" href="/teachers/editexam/<%=exams[i].id%>"
@@ -58,7 +58,6 @@
     </div>
 </div>
 
-
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -71,7 +70,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="addExamForm">
+                <form id="addExamForm" onsubmit="show()">
                     <div class="form-group">
                         <label for="examTitle">Title</label>
                         <input type="text" class="form-control" id="examTitle" placeholder="Exam title"
@@ -86,7 +85,7 @@
                     </div>
                     <div class="form-group">
                         <label for="category">Category</label>
-                        <select class="form-control" id="category">
+                        <select class="custom-select mr-sm-2" id="category">
                             <option>Linux</option>
                             <option>SQL</option>
                             <option>Code</option>
@@ -94,15 +93,15 @@
                             <option>Docker</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group ">
                         <label for="difficulty">Difficulty</label>
-                        <select class="form-control" id="difficulty">
+                        <select class="custom-select mr-sm-2" id="difficulty">
                             <option>Easy</option>
                             <option>Medium</option>
                             <option>Hard</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary" id="<%=user._id%>">Add</button>
+                    <button type="submit" class="btn btn-primary" id="<%=user._id%>" >Add</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 </form>
             </div>

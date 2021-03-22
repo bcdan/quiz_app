@@ -1,4 +1,3 @@
-<script src="/getapi.js" async  ></script>
 <div id="spinner-front">
 </div>
 <h1 class="dash-head mt-4 text-center"><i class="fas fa-list-ol"></i> Exams list</h1>
@@ -44,7 +43,9 @@
                                     <a class="btn btn-primary" href="/teachers/editexam/<%=exams[i].id%>"
                                         role="button">Edit</a>
                                     <button type="submit" class="btn btn-danger">Delete</button>
-
+                                    <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="right" data-content="<%=exams[i].id%>">
+                                        Show ID
+                                      </button>
                                 </div>
                             </form>
 
@@ -110,3 +111,4 @@
         </div>
     </div>
 </div>
+<script src="/getapi.js" async  ></script>

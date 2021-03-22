@@ -173,4 +173,14 @@ exports.myExams = (req, res) => {
 
 exports.editExam = (req,res)=>{
   res.render('editexam',{exam:res.exam,questions:res.questions});
+};
+
+exports.getStats = (req,res) =>{
+  console.log(res.exams);
+  res.render('stats',{exams:res.exams,layout:'./layouts/stats_layout'});
+};
+
+exports.gradesByExam = (req,res)=>{
+  res.json({scores:res.scores});
 }
+

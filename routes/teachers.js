@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const TeachersController = require('../controllers/teachers');
 const { ensureNotAuthenticated , ensureAuthenticated } = require('../config/auth');
-const {getExamsByTeacher,getSingleExam,getQuestionsFromExam} = require('./middlewares');
+const {getExamsByTeacher,getSingleExam,getQuestionsFromExam,getScoresByExam} = require('./middlewares');
+const Teacher = require('../models/Teacher');
 
 // Login Page
 router.get('/login', ensureNotAuthenticated,TeachersController.getLoginPage );
@@ -26,17 +27,27 @@ router.get('/myexams/:id',ensureAuthenticated,getExamsByTeacher,TeachersControll
 router.get('/editexam/:id',ensureAuthenticated,getSingleExam,getQuestionsFromExam,TeachersController.editExam);
 
 //GET all Teachers
-router.get('/',TeachersController.getTeachers);
+router.get('/',ensureAuthenticated,TeachersController.getTeachers);
 
+//GET Stats
+router.get('/stats',ensureAuthenticated,getExamsByTeacher, TeachersController.getStats);
+
+//get all grades by student id
+// router.get('/getgrades/bystudent/:id',TeachersController.gradesByStudent);
+
+//get all grades by exam id
+router.get('/getgrades/byexam/:id',getSingleExam,getScoresByExam,TeachersController.gradesByExam);
 
 //GET teacher by id
-router.get('/:id',TeachersController.getOneTeacher);
+router.get('/:id',ensureAuthenticated,TeachersController.getOneTeacher);
 
 //Update teacher by id
-router.put('/:id',TeachersController.updateTeacher);
+router.put('/:id',ensureAuthenticated,TeachersController.updateTeacher);
 
 //delete a teacher
-router.delete('/:id',TeachersController.deleteTeacher);
+router.delete('/:id',ensureAuthenticated,TeachersController.deleteTeacher);
+
+
 
 
 

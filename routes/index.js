@@ -1,4 +1,5 @@
 const express = require('express');
+const { ensureAuthenticated } = require('../config/auth');
 const router = express.Router();
 const IndexController = require('../controllers/index');
 
@@ -6,7 +7,7 @@ const IndexController = require('../controllers/index');
 
 router.get('/',IndexController.getHomePage);
 
-router.get('/dashboard',IndexController.getDashboard);
+router.get('/dashboard',ensureAuthenticated,IndexController.getDashboard);
 
 
 

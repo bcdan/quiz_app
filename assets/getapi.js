@@ -1,3 +1,8 @@
+document.addEventListener("DOMContentLoaded", function(event) { 
+  $(()=> {
+    $('[data-toggle="popover"]').popover()
+  })
+});
 
 var ExamToApi = {};
 
@@ -5,6 +10,8 @@ var ExamToApi = {};
 const categories = ["Linux","Code","SQL","DevOps","Docker"];
 const durations = [15,30,45,60,90];
 const difficulties = ["easy","medium","hard"];
+
+
 
 
 function getQuestionsFromExternalAPI(category,difficulty) {

@@ -1,13 +1,14 @@
 const Exam = require('../models/Exam.js');
 const Teacher = require('../models/Teacher.js');
 const Question = require('../models/Question.js');
+const Student = require('../models/Student.js');
 
 
 module.exports = {
     getExamsByTeacher: async function (req, res, next) {
         let exams;
         try {
-            const _id = req.params.id;
+            const _id = req.params.id || req.user.id;
             exams = await Exam.find({
                 teacherID: _id
             });
@@ -54,6 +55,22 @@ module.exports = {
             res.status(500).json({message:err.message});
         }
         res.questions=questions;
+        next();
+    },
+    getScoresByExam: async function(req,res,next){
+        let scoresArray = [];        
+        try{
+            const allStudents = await Student.find();
+            allStudents.forEach(student=>{
+                    student.exams.forEach(exam=>{
+                        if(exam.examID==res.exam.id)
+                            scoresArray.push(exam.score);
+                    })
+            });
+        }catch(err){
+            res.status(500).json({message:err.message});
+        }
+        res.scores=scoresArray;
         next();
     }
 }

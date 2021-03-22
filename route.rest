@@ -124,3 +124,16 @@ Content-Type: application/json
 ###
 GET http://localhost:3000/questions/getquestions/api
 
+###
+POST http://localhost:3000/exams/submitscore
+Content-Type:application/json
+
+{
+    "studentid":"1",
+    "examid":"6058696de7dfee1bdce42bbf",
+    "score":50
+    
+}
+###
+GET http://localhost:3000/teachers/getgrades/byexam/6058696de7dfee1bdce42bbf
+

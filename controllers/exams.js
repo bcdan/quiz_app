@@ -184,3 +184,19 @@ exports.startQuiz = (req, res) => {
 exports.getByTeacher = (req, res) => {
   res.json({ exams: res.exams });
 };
+
+exports.submitScore = async (req,res)=>{
+  const { studentid, examid,score } = req.body;
+  try{
+    const studentToFind = await Student.findOne({studentID: studentid});
+    studentToFind.exams.forEach(exam=>{
+      if(examid==exam.examID){
+        exam.score=score;
+      }
+    });
+    await studentToFind.save();
+    res.status(200).json({message:"Score updated"});
+  }catch(err){
+    res.status(500).json({ message: err.message });
+  }
+};

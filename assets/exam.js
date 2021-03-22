@@ -1,12 +1,8 @@
-
-
 const form = document.getElementById("examform");
 form.addEventListener('submit',async function postToApi(event){
-     event.preventDefault();
-    
+    event.preventDefault();
     const studentID =  document.querySelector('#studentid').value;
     const examID = document.querySelector('#examid').value
-    console.log("herasdasdasde")
     let data = {studentid:studentID , examid:examID};
     let target = '/exams/postdetails';
     console.log("trying to fetch");
@@ -28,7 +24,7 @@ form.addEventListener('submit',async function postToApi(event){
             }else{
                 response.json().then(data=>{
                     localStorage.setItem(data._id,JSON.stringify(data));
-                    window.location.replace('/exams/startquiz');
+                    window.location.replace(`/exams/startquiz/?student=${studentID}`);
                 });
             }
 
@@ -36,6 +32,8 @@ form.addEventListener('submit',async function postToApi(event){
 
        
 });
+
+
 
 function myAlert(message){
     let h = document.getElementById("alertZone");

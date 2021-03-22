@@ -6,29 +6,32 @@ const {getExamsByTeacher} = require('./middlewares');
 
 
 //GET all exams
-router.get('/',ExamsController.getExams);
+router.get('/',ensureAuthenticated,ExamsController.getExams);
 
 //Get exams by teacher's ID
 router.get('/getbyteacher/:id',getExamsByTeacher,ExamsController.getByTeacher);
 
 //post student details 
-router.post('/postdetails',ExamsController.postStudentDetails);
+router.post('/postdetails',ensureNotAuthenticated,ExamsController.postStudentDetails);
 
-router.get('/studentform',ExamsController.getStudentExamForm);
+router.get('/studentform',ensureNotAuthenticated,ExamsController.getStudentExamForm);
 
-router.get('/startquiz',ExamsController.startQuiz);
+router.get('/startquiz',ensureNotAuthenticated,ExamsController.startQuiz);
+
+//get score after student completes an exam
+router.post('/submitscore',ensureNotAuthenticated,ExamsController.submitScore);
 
 //GET one exam
-router.get('/:id',ExamsController.getOneExam);
+router.get('/:id',ensureAuthenticated,ExamsController.getOneExam);
 
 //Add one exam
-router.post('/',ExamsController.addExam);
+router.post('/',ensureAuthenticated,ExamsController.addExam);
 
 //Update an exam
-router.put('/:id',ExamsController.updateExam);
+router.put('/:id',ensureAuthenticated,ExamsController.updateExam);
 
 //delete an exam
-router.delete('/:id',ExamsController.deleteExam);
+router.delete('/:id',ensureAuthenticated,ExamsController.deleteExam);
 
 
 

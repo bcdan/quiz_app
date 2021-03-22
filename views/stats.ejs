@@ -1,0 +1,21 @@
+<script type="text/javascript" src="/stats.js"></script>
+<div class="accordion" id="accordionExample">
+    <% for(let i = 0 ; i < exams.length ; i++){%>
+    <div class="card" id="<%=exams[i].id%>">
+        <div class="card-header" id="heading_<%=i%>">
+            <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                    data-target="#collapse_<%=i%>" aria-expanded="true" aria-controls="collapse_<%=i%>">
+                    <%=exams[i].title%>
+                </button>
+            </h2>
+        </div>
+
+        <div id="collapse_<%=i%>" class="collapse" aria-labelledby="heading_<%=i%>" data-parent="#accordionExample">
+            <div class="card-body">
+                <div id="container_<%=i%>" style="width:100%; height:400px;"></div>
+            </div>
+        </div>
+    </div>
+    <%}%>
+</div>

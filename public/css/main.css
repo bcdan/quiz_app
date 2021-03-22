@@ -365,3 +365,14 @@ body  {
   margin-top: 10%;
   width: 35%;
 }
+
+/* Stats page */
+.accordion{
+  margin-top: 5%;
+  width: 50%;
+  margin-left:25%;
+}
+.accordion .card,.accordion .card .btn {
+  background-color: white;
+  color:black;
+}

@@ -18,6 +18,7 @@ let userAnswers;
 let timerCount = 0;
 let interval ;
 let localDuration = localExam[0].duration*60;
+let studentID = new URLSearchParams(window.location.search).get('student');
 // let localDuration = 10;
 
 function allStorage() {
@@ -190,11 +191,30 @@ function showResult(){
     let grade_div = document.querySelector('.grade');
     let score = 100/questions.length;
     grade_div.innerText = score*userScore;
+    score*=userScore;
     let scoreTag = '<span><p>'+ userScore +'</p> out of <p>'+ questions.length+' Correct Answers'+'</p></span>';
     scoreText.innerHTML = scoreTag;
     stopTimer();
+    updateScore(score);//submit results to DB here//
     localStorage.clear();
 
+}
+
+async function updateScore(score){
+    const data = {studentid:studentID,examid:examID,score:score};
+    let resp = await fetch("/exams/submitscore", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(data)
+      });
+      if (!resp.ok) {
+        console.log("error fetchin");
+      } else {
+        return await resp.json();
+      }
 }
 
 

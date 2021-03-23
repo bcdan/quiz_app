@@ -32,8 +32,8 @@ router.get('/',ensureAuthenticated,TeachersController.getTeachers);
 //GET Stats
 router.get('/stats',ensureAuthenticated,getExamsByTeacher, TeachersController.getStats);
 
-//get all grades by student id
-// router.get('/getgrades/bystudent/:id',TeachersController.gradesByStudent);
+//get all grades by student
+router.get('/getgrades/bystudent/:id',TeachersController.gradesByStudent);
 
 //get all grades by exam id
 router.get('/getgrades/byexam/:id',getSingleExam,getScoresByExam,TeachersController.gradesByExam);

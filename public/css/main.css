@@ -367,7 +367,7 @@ body  {
 }
 
 /* Stats page */
-.accordion{
+.accordion , .card.student{
   margin-top: 5%;
   width: 50%;
   margin-left:25%;
@@ -375,4 +375,20 @@ body  {
 .accordion .card,.accordion .card .btn {
   background-color: white;
   color:black;
+}
+#myTab{
+  justify-content: center;
+  margin-top:30px;
+  border-bottom: 0;
+}
+.card.student{
+  background-color: white;
+}
+.card.student .card-body{
+  display:flex;
+  justify-content: center;
+}
+.card.student .card-body input{
+  font-size: 20px;
+  text-align: center;
 }

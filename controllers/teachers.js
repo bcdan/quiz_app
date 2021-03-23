@@ -3,6 +3,8 @@ const passport = require("passport");
 
 // Load Teacher model
 const Teacher = require("../models/Teacher");
+const Student = require("../models/Student");
+const Exam = require("../models/Exam");
 
 exports.getLoginPage = (req, res) => {
   res.render("login", { title: "Login" });
@@ -183,4 +185,29 @@ exports.getStats = (req,res) =>{
 exports.gradesByExam = (req,res)=>{
   res.json({scores:res.scores});
 }
+
+exports.gradesByStudent = async (req,res)=>{
+  let studentid = req.params.id;
+  let examIDArray = [];
+  let examObjects = [];
+  let gradesArray = [];
+  try{
+    const studentToFind = await Student.findOne({studentID: studentid});
+    examIDArray = studentToFind.exams.map(exam=>exam.examID);
+    examObjects = await Exam.find({_id:examIDArray});
+    examObjects.forEach(obj=>{
+      studentToFind.exams.forEach(exam=>{
+        if(exam.examID==obj.id){
+          gradesArray.push(exam.score);
+        }
+      });
+    });
+    examObjects=examObjects.map(exam=>exam.title);
+    res.status(200).json({grades:gradesArray,titles:examObjects});
+  }catch(err){
+    res.status(500).json({message:err.message});
+  }
+}
+
+
 

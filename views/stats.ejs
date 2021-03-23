@@ -1,21 +1,69 @@
 <script type="text/javascript" src="/stats.js"></script>
-<div class="accordion" id="accordionExample">
-    <% for(let i = 0 ; i < exams.length ; i++){%>
-    <div class="card" id="<%=exams[i].id%>">
+<h1 class="dash-head mt-4 text-center"><i class="fas fa-chart-line"></i> Statistics</h1>
+
+
+<ul class="nav nav-tabs " id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <a class="nav-link active" id="exams-tab" data-toggle="tab" href="#myexams" role="tab" aria-controls="exams"
+      aria-selected="true">My exams</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="student-tab" data-toggle="tab" href="#student" role="tab" aria-controls="student"
+      aria-selected="false">Student Statistics</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+      aria-selected="false">Contact</a>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="myexams" role="tabpanel" aria-labelledby="exams-tab">
+    <div class="accordion" id="accordionExample">
+      <% for(let i = 0 ; i < exams.length ; i++){%>
+      <div class="card card-chart" id="<%=exams[i].id%>">
         <div class="card-header" id="heading_<%=i%>">
-            <h2 class="mb-0">
-                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
-                    data-target="#collapse_<%=i%>" aria-expanded="true" aria-controls="collapse_<%=i%>">
-                    <%=exams[i].title%>
-                </button>
-            </h2>
+          <h2 class="mb-0">
+            <button class="btn btn-link btn-block text-center" type="button" data-toggle="collapse"
+              data-target="#collapse_<%=i%>" aria-expanded="true" aria-controls="collapse_<%=i%>">
+              <%=exams[i].title%>
+            </button>
+          </h2>
         </div>
 
         <div id="collapse_<%=i%>" class="collapse" aria-labelledby="heading_<%=i%>" data-parent="#accordionExample">
-            <div class="card-body">
-                <div id="container_<%=i%>" style="width:100%; height:400px;"></div>
-            </div>
+          <div class="card-body">
+            <div id="container_<%=i%>" style="width:100%; height:400px;"></div>
+          </div>
+        </div>
+      </div>
+      <%}%>
         </div>
     </div>
-    <%}%>
-</div>
+
+    <div class="tab-pane fade" id="student" role="tabpanel" aria-labelledby="student-tab">
+      <div class="container-student">
+        <div class="card student">
+            <div class="card-title">
+            </div>
+            <div class="card-body">
+                <form id="bystudent_form">
+                    <div class="form-group">
+                      <input
+                        type="studentid"
+                        id="studentid"
+                        name="studentid"
+                        class="form-control studentid"
+                        placeholder="Enter ID"
+                      />
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Get statistics</button>
+                  </form>
+            </div>
+            <div id="student-chart-container" >
+
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+  </div>

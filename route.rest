@@ -137,3 +137,8 @@ Content-Type:application/json
 ###
 GET http://localhost:3000/teachers/getgrades/byexam/6058696de7dfee1bdce42bbf
 
+
+###
+
+GET http://localhost:3000/teachers/getgrades/testfind/1
+

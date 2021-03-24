@@ -125,13 +125,23 @@ Content-Type: application/json
 GET http://localhost:3000/questions/getquestions/api
 
 ###
+
+POST http://localhost:3000/exams/postdetails
+Content-Type:application/json
+
+{
+    "studentid":"11",
+    "examid":"605b170033baaa64d91f065d"
+    
+}
+###
 POST http://localhost:3000/exams/submitscore
 Content-Type:application/json
 
 {
-    "studentid":"1",
-    "examid":"6058696de7dfee1bdce42bbf",
-    "score":50
+    "studentid":"11",
+    "examid":"605b170033baaa64d91f065d",
+    "score":100
     
 }
 ###
@@ -141,4 +151,5 @@ GET http://localhost:3000/teachers/getgrades/byexam/6058696de7dfee1bdce42bbf
 ###
 
 GET http://localhost:3000/teachers/getgrades/testfind/1
+
 

@@ -1,5 +1,4 @@
 const Exam = require('../models/Exam.js');
-const Teacher = require('../models/Teacher.js');
 const Question = require('../models/Question.js');
 const Student = require('../models/Student.js');
 

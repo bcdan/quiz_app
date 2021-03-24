@@ -3,7 +3,6 @@ const router = express.Router();
 const TeachersController = require('../controllers/teachers');
 const { ensureNotAuthenticated , ensureAuthenticated } = require('../config/auth');
 const {getExamsByTeacher,getSingleExam,getQuestionsFromExam,getScoresByExam} = require('./middlewares');
-const Teacher = require('../models/Teacher');
 
 // Login Page
 router.get('/login', ensureNotAuthenticated,TeachersController.getLoginPage );

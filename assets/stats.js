@@ -18,7 +18,15 @@ function initStudents(){
       let res = await response.json();
       studentChart(res.titles,res.grades);
     }
+    else alert("No such student ID");
   });
+}
+
+function alert(message){
+  let h = document.querySelector('.card-title')
+  let wrapper = document.createElement("div");
+  wrapper.innerHTML=`<div class="alert alert-danger alert-dismissible fade show" role="alert">${message} <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`
+  h.appendChild(wrapper);
 }
 
 function studentChart(titleArray,gradesArray){
@@ -138,6 +146,7 @@ async function initData(id) {
   dataArray.push(temp.sort());
 }
 function chart(index, data) {
+  data.sort(function(a, b){return a-b});
   let mean = data.reduce((a, b) => a + b, 0) / data.length || 0;
   let std = getStandardDeviation(data);
   Highcharts.chart(`container_${index}`, {

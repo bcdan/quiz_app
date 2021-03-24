@@ -4,16 +4,16 @@
 
 <ul class="nav nav-tabs " id="myTab" role="tablist">
   <li class="nav-item" role="presentation">
+    <a class="nav-link" id="dashboard-tab"  href="/dashboard" >Dashboard </a>
+  </li>
+
+  <li class="nav-item" role="presentation">
     <a class="nav-link active" id="exams-tab" data-toggle="tab" href="#myexams" role="tab" aria-controls="exams"
       aria-selected="true">My exams</a>
   </li>
   <li class="nav-item" role="presentation">
     <a class="nav-link" id="student-tab" data-toggle="tab" href="#student" role="tab" aria-controls="student"
       aria-selected="false">Student Statistics</a>
-  </li>
-  <li class="nav-item" role="presentation">
-    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
-      aria-selected="false">Contact</a>
   </li>
 </ul>
 <div class="tab-content" id="myTabContent">
@@ -29,7 +29,6 @@
             </button>
           </h2>
         </div>
-
         <div id="collapse_<%=i%>" class="collapse" aria-labelledby="heading_<%=i%>" data-parent="#accordionExample">
           <div class="card-body">
             <div id="container_<%=i%>" style="width:100%; height:400px;"></div>
@@ -39,9 +38,8 @@
       <%}%>
         </div>
     </div>
-
     <div class="tab-pane fade" id="student" role="tabpanel" aria-labelledby="student-tab">
-      <div class="container-student">
+      <div class=" container-student">
         <div class="card student">
             <div class="card-title">
             </div>
@@ -55,15 +53,14 @@
                         class="form-control studentid"
                         placeholder="Enter ID"
                       />
+                      <small id="studentID_small" class="form-text " >Enter student ID to get statistics</small>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Get statistics</button>
                   </form>
             </div>
             <div id="student-chart-container" >
-
             </div>
         </div>
       </div>
     </div>
-    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
   </div>

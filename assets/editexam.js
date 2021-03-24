@@ -46,7 +46,6 @@ function updateOption(dropdownID){
         } else {
           hide();
             let res = await resp.json();
-            console.log(res);
             location.reload();
           return res;
         }
@@ -65,9 +64,7 @@ async function deleteQuestion(questionID){
     } else {
       hide();
         let res = await resp.json();
-        console.log(res);
         location.reload();
-
       return res;
     }
   }
@@ -97,11 +94,9 @@ async function deleteQuestion(questionID){
     hide();
     console.log("error fetching");
     let res = await resp.json();
-    console.log(res);
   } else {
     hide();
       let res = await resp.json();
-      console.log(res);
       location.reload();
     return res;
   }

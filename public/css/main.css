@@ -102,6 +102,9 @@ body  {
   transform: translateY(-8px);
 }
 
+.nav-tabs .nav-link{
+  border:none;
+}
 .nav-item a{
   color: black;
 }
@@ -391,4 +394,18 @@ body  {
 .card.student .card-body input{
   font-size: 20px;
   text-align: center;
+}
+#studentid{
+  border: 2px solid #565555;
+  border-radius: 8px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 
+  0 2px 10px 0 rgba(0, 0, 0, 0.19);
+
+
+}
+#studentid:focus{
+  box-shadow: 0 0 0 .2rem rgba(0, 0, 0, 0);
+}
+#studentID_small{
+  color:black;
 }

@@ -21,7 +21,6 @@ exports.getExams = async (req, res) => {
 };
 
 exports.addExam = async (req, res) => {
-  console.log(req.body);
   const exam = new Exam({
     title: req.body.title,
     teacherID: req.body.teacherID,
@@ -34,7 +33,6 @@ exports.addExam = async (req, res) => {
     const _id = exam.teacherID;
     if (_id) {
       const teacherToUpdate = await Teacher.findById({ _id });
-      console.log(teacherToUpdate);
       teacherToUpdate.exams.push(newExam);
       await teacherToUpdate.save();
     }
@@ -62,7 +60,6 @@ exports.updateExam = async (req, res) => {
   try {
     const _id = req.params.id;
     const { title, teacherID, duration, date, questions } = req.body;
-    console.log(title,duration,date);
 
     let exam = await Exam.findOne({ _id });
     if (!exam) {

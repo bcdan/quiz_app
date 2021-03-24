@@ -126,7 +126,6 @@ exports.getFromApi = async (req,res)=>{
 exports.addBulk = async (req,res)=>{
 
     const array = req.body;
-    console.log(array);
     try{
         for(const questionReceived of array){
             const question = new Question({

@@ -178,7 +178,6 @@ exports.editExam = (req,res)=>{
 };
 
 exports.getStats = (req,res) =>{
-  console.log(res.exams);
   res.render('stats',{exams:res.exams,layout:'./layouts/stats_layout'});
 };
 

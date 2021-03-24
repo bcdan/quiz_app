@@ -30,34 +30,75 @@ function studentChart(titleArray,gradesArray){
       visible: true,
     },
 
-    xAxis: {
-      visible: false,
+  chart: {
+    type: 'bar'
+},
+
+xAxis: {
+    categories: titleArray,
+    labels:{
+      style:{
+        fontSize: '20px'
+      }
+    },
+    title: {
+        text: 'Exams',
+        style:{
+          fontSize: '30px',
+          color: 'black'
+        }
+        
     },
 
-    yAxis: {
-      min: 0,
-      max: 100,
-      tickInterval: 10,
-      title: {
-        text: "Grades",
-      },
 
-      plotLines: [
-        {
-          color: "#FF0000",
-          width: 2,
-          value: mean,
-        },
-      ],
+},
+yAxis: {
+  min: 0,
+  max: 100,
+  tickInterval: 10,
+    title: {
+        text: 'Grades (0-100)',
+        align: 'high',
+        style:{
+          fontSize: '20px',
+          color: 'black'
+        }
     },
+    labels: {
+        overflow: 'justify',
+        style:{
+          fontSize: '15px'
+        }
+    }
+},
+tooltip: {
+    valueSuffix: ' points',
+    style:{
+      fontSize: '15px'
+    }
 
-    series: [
-      {
-        data: gradesArray,
-        showInLegend: false,
-        name: "Grade",
-      },
-    ],
+},
+plotOptions: {
+    bar: {
+        dataLabels: {
+            enabled: true,
+            style:{
+              fontSize: '15px'
+            }
+        }
+    }
+},
+series: [{
+    name: 'Grade',
+    data: gradesArray,
+}]
+
+
+
+
+
+
+
   });
 
 }
@@ -101,6 +142,10 @@ function chart(index, data) {
   let std = getStandardDeviation(data);
   Highcharts.chart(`container_${index}`, {
     title: {
+      style:{
+        fontSize: '20px',
+        color: 'black'
+      },
       text: `Mean: ${mean.toFixed(2)}  |  Std: ${std.toFixed(2)}`,
       visible: true,
     },
@@ -113,7 +158,17 @@ function chart(index, data) {
       min: 0,
       max: 100,
       tickInterval: 10,
+      labels:{
+        style:{
+          fontSize: '15px',
+          color: 'black'
+        }
+      },
       title: {
+        style:{
+          fontSize: '25px',
+          color: 'black'
+        },
         text: "Grades",
       },
 
@@ -125,13 +180,22 @@ function chart(index, data) {
         },
       ],
     },
-
+    tooltip: {
+      style:{
+        fontSize: '15px'
+      }
+  },
     series: [
       {
+        style:{
+          fontSize: '20px',
+          color: 'black'
+        },
         data: data,
         showInLegend: false,
         name: "Grade",
       },
     ],
+    
   });
 }

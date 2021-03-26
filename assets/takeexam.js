@@ -19,7 +19,6 @@ let timerCount = 0;
 let interval ;
 let localDuration = localExam[0].duration*60;
 let studentID = new URLSearchParams(window.location.search).get('student');
-// let localDuration = 10;
 
 function allStorage() {
     let values = [],

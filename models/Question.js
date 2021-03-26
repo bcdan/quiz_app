@@ -24,10 +24,6 @@ const QuestionSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    points:{
-        type:Number,
-        required:false
-    }
 
 });
 

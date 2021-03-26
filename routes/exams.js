@@ -12,7 +12,6 @@ router.get('/',ensureAuthenticated,ExamsController.getExams);
 router.get('/getbyteacher/:id',getExamsByTeacher,ExamsController.getByTeacher);
 
 //post student details 
-// router.post('/postdetails',ensureNotAuthenticated,ExamsController.postStudentDetails);
 router.post('/postdetails',ExamsController.postStudentDetails);
 
 router.get('/studentform',ensureNotAuthenticated,ExamsController.getStudentExamForm);
@@ -20,7 +19,6 @@ router.get('/studentform',ensureNotAuthenticated,ExamsController.getStudentExamF
  router.get('/startquiz',ensureNotAuthenticated,ExamsController.startQuiz);
 
 //get score after student completes an exam
-// router.post('/submitscore',ensureNotAuthenticated,ExamsController.submitScore);
 router.post('/submitscore',ExamsController.submitScore);
 
 //GET one exam

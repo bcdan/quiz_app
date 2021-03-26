@@ -57,7 +57,7 @@ function initExamToApi(teacherID,title,duration) {
   ExamToApi["title"] = title;
   ExamToApi["duration"] = duration;
   ExamToApi["teacherID"]=teacherID;
-  return fetch("http://localhost:3000/exams", {
+  return fetch("/exams", {
     method: "post",
     headers: {
       "Content-Type": "application/json",
@@ -90,7 +90,7 @@ function randomizeParams(array){
 }
 
 async function postBulk(bulkOfQuestions) {
-  let resp = await fetch("http://localhost:3000/questions/api/post", {
+  let resp = await fetch("/questions/api/post", {
     method: "post",
     headers: {
       "Content-Type": "application/json",

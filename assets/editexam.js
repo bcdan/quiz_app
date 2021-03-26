@@ -32,7 +32,7 @@ function updateOption(dropdownID){
         let choices = [...choicesArray].map(choice=>{return {isCorrect:false,text:choice.value}});
         choices[correctAnswer-1].isCorrect=true;
         const question = {choices:choices,title:title.value};
-        let resp = await fetch(`http://localhost:3000/questions/${formID}`, {
+        let resp = await fetch(`/questions/${formID}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -55,7 +55,7 @@ function updateOption(dropdownID){
 
 async function deleteQuestion(questionID){
   show();
-    let resp = await fetch(`http://localhost:3000/questions/${questionID}`, {
+    let resp = await fetch(`/questions/${questionID}`, {
       method: "DELETE",
     });
     if (!resp.ok) {
@@ -82,7 +82,7 @@ async function deleteQuestion(questionID){
     };
   console.log(JSON.stringify(question));
   show();
-  let resp = await fetch(`http://localhost:3000/questions/`, {
+  let resp = await fetch(`/questions/`, {
     method: "post",
     headers: {
       "Content-Type": "application/json",

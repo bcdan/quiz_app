@@ -15,8 +15,7 @@ exports.addQuestion =async (req,res)=>{
         const question = new Question({
             examID:req.body.examID,
             choices:req.body.choices,
-            title:req.body.title,
-            points:req.body.points
+            title:req.body.title
         });
 
         try{
@@ -53,15 +52,14 @@ exports.getOneQuestion = async (req,res)=>{
 exports.updateQuestion = async (req,res)=>{
     try{
         const _id = req.params.id;
-        const {examID,choices,title,points} = req.body
+        const {examID,choices,title} = req.body
 
         let question = await Question.findOne({_id});
         if(!question){
             question = await Question.create({
                 examID,
                 choices,
-                title,
-                points
+                title
             });
             res.status(201).json(question);
         }else{
@@ -71,8 +69,6 @@ exports.updateQuestion = async (req,res)=>{
                 question.choices=choices;
             if(title!=null)
                 question.title=title;
-            if(points!=null)
-                question.points=points;
             await question.save();
             res.status(200).json(question);
         }
@@ -131,8 +127,7 @@ exports.addBulk = async (req,res)=>{
             const question = new Question({
                 examID:questionReceived.examID,
                 choices:questionReceived.choices,
-                title:questionReceived.title,
-                points:questionReceived.points
+                title:questionReceived.title
             });
     
             const newQuestion = await question.save();

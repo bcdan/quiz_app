@@ -30,11 +30,19 @@ function allStorage() {
     return values;
 }
 
+function shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
+
 
 async function getQuestionsFromDb() {
     let response = await fetch(`/questions/byexam/${examID}`);
     if(response.ok){
-        response.json().then(data=>{questions=data;userAnswers=Array(questions.length).fill(-1);});
+        response.json().then(data=>{questions=shuffle(data);questions.forEach(q=>q.choices=shuffle(q.choices));userAnswers=Array(questions.length).fill(-1);});
     }
   }
 
@@ -188,7 +196,7 @@ function showResult(){
     result_box.classList.add("activeResult"); //show result box
     const scoreText = result_box.querySelector(".score_text");
     let grade_div = document.querySelector('.grade');
-    let score = 100/questions.length;
+    let score = (+100/questions.length).toFixed(0);
     grade_div.innerText = score*userScore;
     score*=userScore;
     let scoreTag = '<span><p>'+ userScore +'</p> out of <p>'+ questions.length+' Correct Answers'+'</p></span>';
@@ -210,7 +218,7 @@ async function updateScore(score){
         body: JSON.stringify(data)
       });
       if (!resp.ok) {
-        console.log("error fetchin");
+        console.log("error fetching");
       } else {
         return await resp.json();
       }

@@ -27,29 +27,36 @@ function getQuestionsFromExternalAPI(category,difficulty) {
 }
 
 function parseJSON(array) {
-  let Exam = {};
-  array.forEach((question) => {
-    question.correct_answer = Object.entries(question.correct_answers)
-      .filter((ans) => ans[1] == "true")[0][0]
-      .substring(0, 8);
-  });
-  Exam = array.map((item) => {
-    let question = {};
-    let isCorrectAnswer = false;
-    question["title"] = item.question;
-    question["choices"] = [];
-    question["examID"] = ExamToApi._id;
-    for (const [key, value] of Object.entries(item.answers)) {
-      if (value != null) {
-        if (key == item.correct_answer) isCorrectAnswer = true;
-        question["choices"].push({ text: value, isCorrect: isCorrectAnswer });
-        isCorrectAnswer = false;
+  try{
+    let Exam = {};
+    array.forEach((question) => {
+      question.correct_answer = Object.entries(question.correct_answers)
+        .filter((ans) => ans[1] == "true")[0][0]
+        .substring(0, 8);
+    });
+    Exam = array.map((item) => {
+      let question = {};
+      let isCorrectAnswer = false;
+      question["title"] = item.question;
+      question["choices"] = [];
+      question["examID"] = ExamToApi._id;
+      for (const [key, value] of Object.entries(item.answers)) {
+        if (value != null) {
+          if (key == item.correct_answer) isCorrectAnswer = true;
+          question["choices"].push({ text: value, isCorrect: isCorrectAnswer });
+          isCorrectAnswer = false;
+        }
       }
-    }
-    return question;
-  });
+      return question;
+    });
+  
+    return Exam;
+  }catch(err){
+    console.log(err);
+    location.reload();
 
-  return Exam;
+  }
+
 }
 
 
@@ -99,7 +106,7 @@ async function postBulk(bulkOfQuestions) {
     body: JSON.stringify(bulkOfQuestions),
   });
   if (!resp.ok) {
-    console.log("error fetchin");
+    console.log("error fetching");
   } else {
     return await resp.json();
   }

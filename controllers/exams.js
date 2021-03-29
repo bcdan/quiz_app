@@ -129,7 +129,6 @@ exports.postStudentDetails = async (req, res) => {
       examid && isValid(examid) && new ObjectId(examid) == examid
         ? examid
         : null;
-    console.log("Documentid", documentId);
     if (!documentId) {
       console.log("not valid id, exiting");
       res.status(404).json({ msg: "Invalid exam id! " });

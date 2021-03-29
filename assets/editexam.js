@@ -28,7 +28,10 @@ function updateOption(dropdownID){
         let title = form.querySelector('.form-control.question');
         let choicesArray = form.querySelectorAll('.form-control.choice');
         let selection = document.getElementById(`drop_${formID}`);
-        let correctAnswer = selection.querySelector('.dropdown-item.active').innerText;
+        let correctAnswer = selection.querySelector('.dropdown-item.active');
+        if(correctAnswer===null){
+          correctAnswer=selection.querySelector('.dropdown-item').innerText;
+        }else correctAnswer=correctAnswer.innerText;
         let choices = [...choicesArray].map(choice=>{return {isCorrect:false,text:choice.value}});
         choices[correctAnswer-1].isCorrect=true;
         const question = {choices:choices,title:title.value};
@@ -80,7 +83,6 @@ async function deleteQuestion(questionID){
       ],
       title:"new question"
     };
-  console.log(JSON.stringify(question));
   show();
   let resp = await fetch(`/questions/`, {
     method: "post",
